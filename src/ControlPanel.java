@@ -33,6 +33,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 	public boolean havereadh = false;
 	public boolean havereadt = false;
 	private JLabel currentUser = new JLabel();
+	private JLabel aboutPassord = new JLabel("Password must contain more than 8 characters, sepcial characters, capital letters, number");
+
 	private JCheckBox cb = new JCheckBox("Not show password");
 	public JCheckBox keepLogged = new JCheckBox("Keep Logged in");
 	public static boolean keepLogg = false;
@@ -77,7 +79,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		this.add(psswd);
 		this.add(cb);
 		this.add(keepLogged);
-
+        this.add(aboutPassord);
 		for(int i=0; i<allButton.length; this.add(allButton[i++]));
 		allButton[2].setVisible(false);
 		allButton[4].setVisible(false);
@@ -104,7 +106,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 
 		currentUser.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 		currentUser.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
-
+		aboutPassord.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 	}
 
 	public boolean checkNumInPass() {
@@ -174,6 +176,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		this.add(currentUser);
 		SuperGoodUI.privacyP.setVisible(false);
 		UserCredent.doDis = false;
+		aboutPassord.setVisible(false);
 	}
 	
 	@Override
@@ -251,8 +254,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		}
 		
 		if(s.equals("Forget password")) {
-			popUp("There is nothing we can do to restore your password since it is stored at your local device\nYou should register a new account\n Or you can Brutefore your password","Sorry");
-			
+			if(confirm("There is nothing we can do to restore your password since it is stored at your local device\nYou should register a new account\nDo you want to Brutefore to find your password?\nRead help at the main screen to learn more about bruteforcing")==0)
+			BruteForce.doingit();
 		}
 
 		if(s.equals("Read terms and conditions")&&!isReadingHelp) {
@@ -329,7 +332,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 			this.remove(currentUser);
 			UserCredent.loginS=false;
 			SuperGoodUI.privacyP.setVisible(true);
-
+			aboutPassord.setVisible(true);
 		}
 		if(s.equals("Close Terms Conditions")) {
 			isReadingTerms  = false;

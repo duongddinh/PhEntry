@@ -29,7 +29,7 @@ public class UserCredent {
 				bw.write(getHash(pswwd)+"\n");
 				ControlPanel.popUp("Successfully created an account", "Nice!");
 				ControlPanel.popUp("Logged in", "Log in successfully");
-                doDis = true;
+				doDis = true;
 			} catch (IOException e2) {
 				e2.printStackTrace();
 				ControlPanel.popUp("Task failed successfully", "Not Nice!");
@@ -56,8 +56,7 @@ public class UserCredent {
 		BufferedReader reader;
 		StringBuilder sb = null;
 		try {
-			reader = new BufferedReader(new FileReader(
-					System.getProperty("user.dir")+"/usercre.txt"));
+			reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/usercre.txt"));
 			sb = new StringBuilder();
 			String line = reader.readLine();
 			while (line != null) {
@@ -75,50 +74,35 @@ public class UserCredent {
 		return false;
 	}
 
-	public static void keepLogged() {
+	private static String getFistLine(String name) {
 		BufferedReader reader1 = null;
+		String daline = "";
 		try {
-			reader1 = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/keepL.txt"));
+			reader1 = new BufferedReader(new FileReader(System.getProperty("user.dir")+name));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	
 		try {
-			line1 = reader1.readLine();
+			daline = reader1.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		currentUser = line1;
 		try {
 			reader1.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (Boolean.parseBoolean(line1)) {
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/usercre.txt"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		String line = null;
-		try {
-			line = reader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		currentUser = line;
-		try {
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		}
-		
+		return daline;
 	}
-	
+
+	public static void keepLogged() {
+		line1 = getFistLine("/keepL.txt");
+		if (Boolean.parseBoolean(line1)) {
+			currentUser = getFistLine("/usercre.txt");
+		}
+
+	}
+
 	public static void login(String username, String password) {
 		BufferedReader reader;
 		String userCre[] = new String[2];
@@ -157,8 +141,8 @@ public class UserCredent {
 		ControlPanel.popUp("Removed user", "removed successfully");
 
 	}
-	
-	private static String getHash(String pssd) {
+
+	public static String getHash(String pssd) {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("SHA-256");

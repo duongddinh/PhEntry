@@ -1,13 +1,17 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,8 +21,8 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
 	public static boolean Accepted = false;
-    public static JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
-    WriteLogF wl = new WriteLogF();
+	public static JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
+	WriteLogF wl = new WriteLogF();
 	public SuperGoodUI() {
 		frame = new JFrame("Nice register UI");  
 		frame.setResizable(false);
@@ -38,60 +42,63 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 				System.exit(0);
 			}
 		});
-		   TimerTask task = new TimerTask() {
-			      @Override
-			      public void run() {
-			    	  periodicPop();
-			      }
-			    };
-			    Timer timer = new Timer();
-			    long delay = 1;
-			    long intevalPeriod = 1 * 30000; 
-			    timer.scheduleAtFixedRate(task, delay, intevalPeriod);
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				periodicPop();
+			}
+		};
+		Timer timer = new Timer();
+		long delay = 1;
+		long intevalPeriod = 1 * 30000; 
+		timer.scheduleAtFixedRate(task, delay, intevalPeriod);
 		privacyP.setSelected(true);
 		privacyP.addActionListener(this);
 		frame.add(this);
-        frame.add(new ControlPanel(), BorderLayout.NORTH);
-        frame.add(privacyP, BorderLayout.SOUTH);
+		frame.add(new ControlPanel(), BorderLayout.NORTH);
+		frame.add(privacyP, BorderLayout.SOUTH);
 		frame.setVisible(true); 
 	}
-	
+
 
 	private void periodicPop() {
 		if(!HidePopUpOPtion.hideRP)
-		if(Math.random() < 0.5) {
-			ControlPanel.popUp("Remeber to rate this app 5 stars on the store!!!","Improtant");
-		}
-		else {
-			ControlPanel.popUp("We don't use cookies, so you need to accept by clicking ok!!","Important");
+			if(Math.random() < 0.5) {
+				ControlPanel.popUp("Remeber to rate this app 5 stars on the store!!!","Improtant");
+			}
+			else {
+				ControlPanel.popUp("We don't use cookies, so you need to accept by clicking ok!!","Important");
 
-		}
-		
+			}
+
 	}
-	
 
 	public void paint(Graphics g) {
 		g.setColor(Color.RED);
-		g.drawString("Password must contain more than 8 characters, sepcial characters, capital letters, number", 150, 400);
-	    
-	
+		try {
+			Image icon = new ImageIcon(new URL("https://raw.githubusercontent.com/frychicken/emojiPack/master/animation/dab.gif")).getImage();
+			g.drawImage(icon, 50, 50, this);
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		
+	public void actionPerformed(ActionEvent e) {	
 		if(privacyP.isSelected()) {
 			if(!HidePopUpOPtion.hideRP)
-			ControlPanel.popUp("You gotta accept the terms and conditions to continue", "About");
-            Accepted = false;
+				ControlPanel.popUp("You gotta accept the terms and conditions to continue", "About");
+			Accepted = false;
 		} else {
 			if(!HidePopUpOPtion.hideRP)
-			ControlPanel.popUp("Make sure you read the terms and conditions\n are you sure you accept it?", "About");
-            Accepted = true;
+				ControlPanel.popUp("Make sure you read the terms and conditions\n are you sure you accept it?", "About");
+			Accepted = true;
 
 		}		
 	}
-	
-	
-	
+
+
+
 }
