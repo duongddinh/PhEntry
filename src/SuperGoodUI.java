@@ -16,7 +16,8 @@ import javax.swing.WindowConstants;
 public class SuperGoodUI extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	public static JFrame frame;
-    private JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
+	public static boolean Accepted = false;
+    public static JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
     WriteLogF wl = new WriteLogF();
 	public SuperGoodUI() {
 		frame = new JFrame("Nice register UI");  
@@ -57,6 +58,7 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	
 
 	private void periodicPop() {
+		if(!HidePopUpOPtion.hideRP)
 		if(Math.random() < 0.5) {
 			ControlPanel.popUp("Remeber to rate this app 5 stars on the store!!!","Improtant");
 		}
@@ -77,11 +79,15 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(privacyP.isSelected()) {
+			if(!HidePopUpOPtion.hideRP)
 			ControlPanel.popUp("You gotta accept the terms and conditions to continue", "About");
-
+            Accepted = false;
 		} else {
+			if(!HidePopUpOPtion.hideRP)
 			ControlPanel.popUp("Make sure you read the terms and conditions\n are you sure you accept it?", "About");
+            Accepted = true;
 
 		}		
 	}

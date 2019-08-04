@@ -4,11 +4,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -20,7 +23,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JTextField username;
 	private JPasswordField psswd;
-	private JButton allButton[] = new JButton[9];
+	private JButton allButton[] = new JButton[12];
 	private long tStart;
 	private long tStart2;
 	private boolean isReadingPrvacy = false;
@@ -29,8 +32,10 @@ public class ControlPanel extends JPanel  implements ActionListener{
 	public boolean havereadp = false;
 	public boolean havereadh = false;
 	public boolean havereadt = false;
-
+	private JLabel currentUser = new JLabel();
 	private JCheckBox cb = new JCheckBox("Not show password");
+	public JCheckBox keepLogged = new JCheckBox("Keep Logged in");
+	public static boolean keepLogg = false;
 	public static boolean readterms = false;
 	public ControlPanel() {
 		allButton[0] = new JButton("Register because I don't have an account");
@@ -42,9 +47,14 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		allButton[6] = new JButton("Close Privacy policy");
 		allButton[7] = new JButton("Log in because I already have an account as I created it");
 		allButton[8] = new JButton("Log out because I don't want to log in anymore");
+		allButton[9] = new JButton("Auto-Generate password");
+		allButton[10] = new JButton("Hide popUp");
+		allButton[11] = new JButton("Forget password");
+
 		for(int i=0; i< allButton.length; allButton[i++].addActionListener(this));
 		for(int i=0; i< allButton.length; allButton[i++].setOpaque(true));
 		cb.setOpaque(true);
+		keepLogged.setOpaque(true);
 		username = new JTextField("Type in the name please", 30);
 		username.grabFocus();
 		psswd = new JPasswordField("Type in the password", 30);
@@ -59,17 +69,25 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		long intevalPeriod = 1 * 1000; 
 		timer.scheduleAtFixedRate(task, delay, intevalPeriod);
 		cb.addActionListener(this);
+		keepLogged.addActionListener(this);
 
-		this.setPreferredSize(new Dimension(50,120));
+		this.setPreferredSize(new Dimension(50,190));
 		this.setBackground(new Color(0, 0, 139));  
 		this.add(username);
 		this.add(psswd);
 		this.add(cb);
+		this.add(keepLogged);
+
 		for(int i=0; i<allButton.length; this.add(allButton[i++]));
 		allButton[2].setVisible(false);
 		allButton[4].setVisible(false);
 		allButton[6].setVisible(false);
 		allButton[8].setVisible(false);
+		UserCredent.keepLogged();
+		keepLogged.setSelected(Boolean.parseBoolean(UserCredent.line1));
+		if (Boolean.parseBoolean(UserCredent.line1)) {
+			loggedIN();
+		}
 
 	}
 
@@ -77,8 +95,15 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		cb.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 		cb.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 
+		keepLogged.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
+		keepLogged.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
+
+
 		for (int i=0; i< allButton.length; allButton[i++].setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)))));
 		for (int i=0; i< allButton.length; allButton[i++].setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)))));
+
+		currentUser.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
+		currentUser.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 
 	}
 
@@ -89,7 +114,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				return true;
 			}
 		}
-		popUp("Atleast a number is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP)
+			popUp("Atleast a number is required","password is not secured");
 
 		return false;
 	}
@@ -101,7 +127,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				return true;
 			}
 		}
-		popUp("Atleast a special charater is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP)
+			popUp("Atleast a special charater is required","password is not secured");
 
 		return false;
 
@@ -114,7 +141,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				return true;
 			}
 		}
-		popUp("Atleast a lower case charater is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP)
+			popUp("Atleast a lower case charater is required","password is not secured");
 
 		return false;
 
@@ -127,43 +155,106 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				return true;
 			}
 		}
-		popUp("Atleast a upper case charater is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP)
+			popUp("Atleast a upper case charater is required","password is not secured");
 
 		return false;
 	}
 
+	public  void loggedIN() {
+		allButton[0].setVisible(false);
+		allButton[7].setVisible(false);
+		allButton[8].setVisible(true);
+		username.setVisible(false);
+		psswd.setVisible(false);
+		cb.setVisible(false);
+		allButton[9].setVisible(false);
+		keepLogged.setVisible(false);
+		currentUser = new JLabel("Welcome back, "+UserCredent.currentUser);
+		this.add(currentUser);
+		SuperGoodUI.privacyP.setVisible(false);
+		UserCredent.doDis = false;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand(); 
+		if(keepLogged.isSelected()) {
+			keepLogg = true;
+			PrintWriter writer = null;
+			try {
+				writer = new PrintWriter(System.getProperty("user.dir")+"/keepL.txt");
+			} catch (FileNotFoundException e2) {
+				e2.printStackTrace();
+			}
+			writer.print(keepLogg);
+			writer.close();
+		} else {
+			keepLogg = false;
+			PrintWriter writer = null;
+			try {
+				writer = new PrintWriter(System.getProperty("user.dir")+"/keepL.txt");
+			} catch (FileNotFoundException e2) {
+				e2.printStackTrace();
+			}
+			writer.print(keepLogg);
+			writer.close();
+		}
+		
+		
 		if(cb.isSelected()) {
 			psswd.setEchoChar('*');
 		} else {
-			popUp("Showing password may potentially get your password stolen\ncheck the option if you don't want to take a risk!","Warning");
+			if (!HidePopUpOPtion.hideNSPP) {
+				popUp("Showing password may potentially get your password stolen\ncheck the option if you don't want to take a risk!","Warning");
+			}
 			psswd.setEchoChar((char) 0);
 		}
 		if (s.equals("Register because I don't have an account") ) {
 			if (confirm("Are you not want to register?\nyou will have to remember your password and username\nfurthermore, it will cost you few bytes storage!") == 0) {
 				if (havereadh && havereadp && havereadt) {
-					if (String.valueOf(psswd.getPassword()).length() >=8 && checkNumInPass() && checkSpecialInPass()&& checkLowerCInPass() && checkUpperCInPass()) {
+					if (String.valueOf(psswd.getPassword()).length() >=8 && checkNumInPass() && checkSpecialInPass()&& checkLowerCInPass() && checkUpperCInPass() && SuperGoodUI.Accepted) {
 						UserCredent.createnew(username.getText(),String.valueOf(psswd.getPassword()));
-						allButton[0].setVisible(false);
-						allButton[7].setVisible(false);
-						allButton[8].setVisible(true);
-						username.setVisible(false);
-						psswd.setVisible(false);
-						cb.setVisible(false);
+
+						if(UserCredent.doDis) {
+							loggedIN();
+						}
+
+
 					} else {
 						if (String.valueOf(psswd.getPassword()).length() <8 ) {
-							popUp("Your password needs atleast 8 characters","Password is not secured!!");
+							if(!HidePopUpOPtion.hideNRP)
+								popUp("Your password needs atleast 8 characters","Password is not secured!!");
 						}
-						popUp("Your password is not strong enough\nMake sure your password meets the criteria","password is not secured");
+						if (!SuperGoodUI.Accepted) {
+							if(!HidePopUpOPtion.hideNRP)
+								popUp("Accept terms and condition to continue","Need to accept");
+
+						}
+						if(!HidePopUpOPtion.hideRP)
+							popUp("Your password is not strong enough\nMake sure your password meets the criteria","password is not secured");
 					}
 
 				} else {
-					popUp("You haven't read help/terms and conditions/privacy policy\nTherefore, you can't continue\n We want to make sure you understand everything", "warning");
+					if(!HidePopUpOPtion.hideNRP)
+						popUp("You haven't read help/terms and conditions/privacy policy\nTherefore, you can't continue\n We want to make sure you understand everything", "warning");
 				}
 			}
 		}
+
+		if(s.equals("Auto-Generate password")) {
+			new AutoGenQuestion();
+		}
+
+		if(s.equals("Hide popUp")) {
+			new HidePopUpOPtion();
+		}
+		
+		if(s.equals("Forget password")) {
+			popUp("There is nothing we can do to restore your password since it is stored at your local device\nYou should register a new account\n Or you can Brutefore your password","Sorry");
+			
+		}
+
 		if(s.equals("Read terms and conditions")&&!isReadingHelp) {
 			if (!isReadingPrvacy) {
 				isReadingTerms  = true;
@@ -171,7 +262,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				ShowTermYC.doit();
 				allButton[2].setVisible(true);
 				allButton[1].setVisible(false);
-			} else popUp("dude, keep reading.", "Keep reading");
+			} else {
+				if(!HidePopUpOPtion.hideNRP)
+					popUp("dude, keep reading.", "Keep reading");}
 		}
 		if(s.equals("help")) {
 			isReadingHelp = true;
@@ -179,7 +272,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				Help.showHelp();
 				allButton[4].setVisible(true);
 				allButton[3].setVisible(false);
-			} else popUp("You haven't done reading yet!", "Keep reading");
+			} else {
+				if(!HidePopUpOPtion.hideNRP)
+					popUp("You haven't done reading yet!", "Keep reading");}
 		}
 		if(s.equals("Close Help")) {
 			havereadh = true;
@@ -190,15 +285,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		}
 		if (s.equals("Log in because I already have an account as I created it")) {
 			UserCredent.login(username.getText(),String.valueOf(psswd.getPassword()));
-            if (UserCredent.loginS) {
-    			allButton[0].setVisible(false);
-    			allButton[7].setVisible(false);
-    			allButton[8].setVisible(true);
-    			username.setVisible(false);
-    			psswd.setVisible(false);
-    			cb.setVisible(false);
-
-            }
+			if (UserCredent.loginS) {
+				loggedIN();
+			}
 		}
 		if (s.equals("Privacy policy") && !isReadingHelp) {
 			if (!isReadingTerms) {
@@ -207,7 +296,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				ShowPrivacyPo.doit();
 				allButton[5].setVisible(false);
 				allButton[6].setVisible(true);
-			} else popUp("dude, keep reading", "Keep reading");
+			} else {
+				if(!HidePopUpOPtion.hideNRP)
+					popUp("dude, keep reading", "Keep reading");}
 
 		}
 		if (s.equals("Close Privacy policy")) {
@@ -219,7 +310,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				allButton[5].setVisible(true);
 				allButton[6].setVisible(false);
 			} else {
-				popUp("There is no way you read that fast, keep reading\n"+(tEnd2 - tStart2)/1000.0 +"/"+300+" secs", "Keep reading");
+				if(!HidePopUpOPtion.hideNRP)
+					popUp("There is no way you read that fast, keep reading\n"+(tEnd2 - tStart2)/1000.0 +"/"+300+" secs", "Keep reading");
 
 			}
 
@@ -232,7 +324,12 @@ public class ControlPanel extends JPanel  implements ActionListener{
 			username.setVisible(true);
 			psswd.setVisible(true);
 			cb.setVisible(true);
-			
+			allButton[9].setVisible(true);
+			keepLogged.setVisible(true);
+			this.remove(currentUser);
+			UserCredent.loginS=false;
+			SuperGoodUI.privacyP.setVisible(true);
+
 		}
 		if(s.equals("Close Terms Conditions")) {
 			isReadingTerms  = false;
@@ -244,7 +341,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				allButton[1].setVisible(true);
 			}
 			else {
-				popUp("There is no way you read that fast, keep reading\n"+(tEnd - tStart)/1000.0 +"/"+300+" secs", "Keep reading");
+				if(!HidePopUpOPtion.hideNRP)
+					popUp("There is no way you read that fast, keep reading\n"+(tEnd - tStart)/1000.0 +"/"+300+" secs", "Keep reading");
 			}
 
 		}
@@ -252,11 +350,13 @@ public class ControlPanel extends JPanel  implements ActionListener{
 	}
 
 	public static void popUp(String todis, String title) {
-		JOptionPane.showMessageDialog((Component) null, todis,
-				title, JOptionPane.INFORMATION_MESSAGE);
+		if (!HidePopUpOPtion.hideAllP) {
+			JOptionPane.showMessageDialog((Component) null, todis,
+					title, JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
-	public int confirm(String todis) {
+	public static int confirm(String todis) {
 		return JOptionPane.showConfirmDialog((Component) null, todis,
 				"Confirm", JOptionPane.YES_NO_OPTION);
 	}

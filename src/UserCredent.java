@@ -1,12 +1,23 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.xml.bind.DatatypeConverter;
 
 public class UserCredent {
 	public static boolean loginS = false;
+	public static String currentUser ="";
+	public static boolean doDis = false;
+	public static String line1 = "false";
 	public static void createnew(String usercre, String pswwd) {
+		currentUser = usercre;
 		if(checkexistuser()) {
 			String cheee = System.getProperty("user.dir")+"/usercre.txt";
 			BufferedWriter bw = null;
@@ -15,10 +26,10 @@ public class UserCredent {
 				fw = new FileWriter(cheee, true);
 				bw = new BufferedWriter(fw);
 				bw.write(usercre+"\n");
-				bw.write(pswwd+"\n");
+				bw.write(getHash(pswwd)+"\n");
 				ControlPanel.popUp("Successfully created an account", "Nice!");
 				ControlPanel.popUp("Logged in", "Log in successfully");
-
+                doDis = true;
 			} catch (IOException e2) {
 				e2.printStackTrace();
 				ControlPanel.popUp("Task failed successfully", "Not Nice!");
@@ -34,7 +45,9 @@ public class UserCredent {
 				}
 			}
 		} else {
-			ControlPanel.popUp("You already have an account, you cannot create new", "Action can't be done");
+			if(ControlPanel.confirm("You already have an account, you cannot create new\n Do you want to remove current User can create new?")==0) {
+				removeUser();
+			}
 		}
 
 	}
@@ -62,6 +75,50 @@ public class UserCredent {
 		return false;
 	}
 
+	public static void keepLogged() {
+		BufferedReader reader1 = null;
+		try {
+			reader1 = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/keepL.txt"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	
+		try {
+			line1 = reader1.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		currentUser = line1;
+		try {
+			reader1.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (Boolean.parseBoolean(line1)) {
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/usercre.txt"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String line = null;
+		try {
+			line = reader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		currentUser = line;
+		try {
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		}
+		
+	}
+	
 	public static void login(String username, String password) {
 		BufferedReader reader;
 		String userCre[] = new String[2];
@@ -79,14 +136,37 @@ public class UserCredent {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (!username.equals(userCre[0]) ||!password.equals(userCre[1]) ){
+		if (!username.equals(userCre[0]) ||!getHash(password).equals(userCre[1]) ){
 			ControlPanel.popUp("Wrong username or password\nIf you don't have an account, you can register new account", "Log in failed successfully");
 		} else {
 			ControlPanel.popUp("Logged in", "Log in successfully");
 			loginS = true;
+			currentUser = userCre[0];
 		}
 	}
 
+	private static void removeUser() {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(System.getProperty("user.dir")+"/usercre.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		writer.print("");
+		writer.close();
+		ControlPanel.popUp("Removed user", "removed successfully");
 
+	}
+	
+	private static String getHash(String pssd) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		byte[] digest = md.digest(pssd.getBytes(StandardCharsets.UTF_8));
+		return DatatypeConverter.printHexBinary(digest).toLowerCase();
+	}
 
 }

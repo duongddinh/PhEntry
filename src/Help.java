@@ -31,9 +31,10 @@ public class Help extends JPanel {
 				WebEngine webEngine = browser.getEngine();
 				webEngine.load("https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/README.MD");
 				Worker<Void> worker = webEngine.getLoadWorker();
-				progressBar.progressProperty().bind(worker.progressProperty());
 				ObservableList<Node> children = root.getChildren();
-				children.addAll(browser, progressBar);                     
+				progressBar.progressProperty().bind(worker.progressProperty());
+				progressBar.setPrefSize(800, 10);
+				children.addAll(browser,progressBar);                     
 				jfxPanel.setScene(scene);  
 				SuperGoodUI.frame.getContentPane().add(jfxPanel, BorderLayout.CENTER);
 				SuperGoodUI.frame.setLocationRelativeTo(null);
