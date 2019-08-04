@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -74,16 +73,22 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(Color.RED);
-		try {
-			Image icon = new ImageIcon(new URL("https://raw.githubusercontent.com/frychicken/emojiPack/master/animation/dab.gif")).getImage();
-			g.drawImage(icon, 50, 50, this);
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+           drawDabg(g);
 
 	}
+	
+	private void drawDabg(Graphics g) {
+		if(!ControlPanel.isReadingPrvacy) {
+			try {
+				Image icon = new ImageIcon(new URL("https://i.pinimg.com/originals/c4/dd/5d/c4dd5d671bb86d8551e9697c2d9ece06.gif")).getImage();
+				g.drawImage(icon, 230, 200, this);
+
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		}	
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {	

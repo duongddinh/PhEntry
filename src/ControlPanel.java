@@ -23,22 +23,26 @@ public class ControlPanel extends JPanel  implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JTextField username;
 	private JPasswordField psswd;
-	private JButton allButton[] = new JButton[12];
+	public static JButton allButton[] = new JButton[12];
 	private long tStart;
 	private long tStart2;
-	private boolean isReadingPrvacy = false;
+	public static boolean isReadingPrvacy = false;
 	private boolean isReadingTerms = false;
-	private boolean isReadingHelp = false;
+	public static boolean isReadingHelp = false;
 	public boolean havereadp = false;
-	public boolean havereadh = false;
+	public static boolean havereadh = false;
 	public boolean havereadt = false;
 	private JLabel currentUser = new JLabel();
 	private JLabel aboutPassord = new JLabel("Password must contain more than 8 characters, sepcial characters, capital letters, number");
 
 	private JCheckBox cb = new JCheckBox("Not show password");
 	public JCheckBox keepLogged = new JCheckBox("Keep Logged in");
+	public JCheckBox playsound = new JCheckBox("Play sound");
+
+	private boolean soundfx = false;
 	public static boolean keepLogg = false;
 	public static boolean readterms = false;
+
 	public ControlPanel() {
 		allButton[0] = new JButton("Register because I don't have an account");
 		allButton[1] = new JButton("Read terms and conditions");
@@ -57,6 +61,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		for(int i=0; i< allButton.length; allButton[i++].setOpaque(true));
 		cb.setOpaque(true);
 		keepLogged.setOpaque(true);
+		playsound.setOpaque(true);
+
 		username = new JTextField("Type in the name please", 30);
 		username.grabFocus();
 		psswd = new JPasswordField("Type in the password", 30);
@@ -72,6 +78,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		timer.scheduleAtFixedRate(task, delay, intevalPeriod);
 		cb.addActionListener(this);
 		keepLogged.addActionListener(this);
+		playsound.addActionListener(this);
 
 		this.setPreferredSize(new Dimension(50,190));
 		this.setBackground(new Color(0, 0, 139));  
@@ -81,6 +88,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		this.add(keepLogged);
         this.add(aboutPassord);
 		for(int i=0; i<allButton.length; this.add(allButton[i++]));
+		this.add(playsound);
 		allButton[2].setVisible(false);
 		allButton[4].setVisible(false);
 		allButton[6].setVisible(false);
@@ -99,6 +107,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 
 		keepLogged.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 		keepLogged.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
+
+		playsound.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
+		playsound.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 
 
 		for (int i=0; i< allButton.length; allButton[i++].setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)))));
@@ -183,6 +194,10 @@ public class ControlPanel extends JPanel  implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand(); 
 		if(keepLogged.isSelected()) {
+			if(soundfx) {
+				PlaySound.play();
+			}
+			
 			keepLogg = true;
 			PrintWriter writer = null;
 			try {
@@ -204,8 +219,18 @@ public class ControlPanel extends JPanel  implements ActionListener{
 			writer.close();
 		}
 		
+		if(playsound.isSelected()) {
+			soundfx = true;
+		} else {
+			soundfx = false;
+		}
 		
 		if(cb.isSelected()) {
+			
+			if(soundfx) {
+				PlaySound.play();
+			}
+			
 			psswd.setEchoChar('*');
 		} else {
 			if (!HidePopUpOPtion.hideNSPP) {
@@ -214,6 +239,11 @@ public class ControlPanel extends JPanel  implements ActionListener{
 			psswd.setEchoChar((char) 0);
 		}
 		if (s.equals("Register because I don't have an account") ) {
+			
+			if(soundfx) {
+				PlaySound.play();
+			}
+			
 			if (confirm("Are you not want to register?\nyou will have to remember your password and username\nfurthermore, it will cost you few bytes storage!") == 0) {
 				if (havereadh && havereadp && havereadt) {
 					if (String.valueOf(psswd.getPassword()).length() >=8 && checkNumInPass() && checkSpecialInPass()&& checkLowerCInPass() && checkUpperCInPass() && SuperGoodUI.Accepted) {
@@ -246,19 +276,33 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		}
 
 		if(s.equals("Auto-Generate password")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			new AutoGenQuestion();
 		}
 
 		if(s.equals("Hide popUp")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			new HidePopUpOPtion();
 		}
 		
 		if(s.equals("Forget password")) {
+			
+			if(soundfx) {
+				PlaySound.play();
+			}
+			
 			if(confirm("There is nothing we can do to restore your password since it is stored at your local device\nYou should register a new account\nDo you want to Brutefore to find your password?\nRead help at the main screen to learn more about bruteforcing")==0)
 			BruteForce.doingit();
 		}
 
 		if(s.equals("Read terms and conditions")&&!isReadingHelp) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			if (!isReadingPrvacy) {
 				isReadingTerms  = true;
 				tStart = System.currentTimeMillis();
@@ -270,9 +314,13 @@ public class ControlPanel extends JPanel  implements ActionListener{
 					popUp("dude, keep reading.", "Keep reading");}
 		}
 		if(s.equals("help")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			isReadingHelp = true;
 			if (!isReadingPrvacy &&!isReadingTerms) {
-				Help.showHelp();
+				Help welp = new Help();
+				welp.showHelp();
 				allButton[4].setVisible(true);
 				allButton[3].setVisible(false);
 			} else {
@@ -280,6 +328,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 					popUp("You haven't done reading yet!", "Keep reading");}
 		}
 		if(s.equals("Close Help")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			havereadh = true;
 			isReadingHelp = false;
 			Help.closeHelp();
@@ -287,12 +338,18 @@ public class ControlPanel extends JPanel  implements ActionListener{
 			allButton[3].setVisible(true);
 		}
 		if (s.equals("Log in because I already have an account as I created it")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			UserCredent.login(username.getText(),String.valueOf(psswd.getPassword()));
 			if (UserCredent.loginS) {
 				loggedIN();
 			}
 		}
 		if (s.equals("Privacy policy") && !isReadingHelp) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			if (!isReadingTerms) {
 				isReadingPrvacy = true;
 				tStart2 = System.currentTimeMillis();
@@ -305,6 +362,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 
 		}
 		if (s.equals("Close Privacy policy")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			havereadp = true;
 			isReadingPrvacy = false;
 			long tEnd2 = System.currentTimeMillis();
@@ -321,6 +381,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		}
 
 		if (s.equals("Log out because I don't want to log in anymore")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			allButton[0].setVisible(true);
 			allButton[7].setVisible(true);
 			allButton[8].setVisible(false);
@@ -335,6 +398,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 			aboutPassord.setVisible(true);
 		}
 		if(s.equals("Close Terms Conditions")) {
+			if(soundfx) {
+				PlaySound.play();
+			}
 			isReadingTerms  = false;
 			havereadt = true;
 			long tEnd = System.currentTimeMillis();

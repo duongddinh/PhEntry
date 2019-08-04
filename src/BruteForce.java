@@ -1,11 +1,8 @@
-import java.awt.BorderLayout;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import javax.swing.JLabel;
 
 public class BruteForce {
 	private static Frame bobJFrame;

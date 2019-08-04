@@ -1,7 +1,11 @@
 import com.sun.javafx.application.PlatformImpl;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -10,19 +14,23 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javafx.concurrent.Worker;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
 
 public class Help extends JPanel {
-	private static final long serialVersionUID = 1L;
-	private static JFXPanel jfxPanel;  
 
-	public static void showHelp() {
+	private static final long serialVersionUID = 1L;
+	private static JFrame frame;
+	JFXPanel jfxPanel;
+	public Help() {
+		jfxPanel = new JFXPanel();  
 		PlatformImpl.startup(new Runnable() {  
 			@Override
-			public void run() {
+			public void run() {  
 				ProgressBar progressBar = new ProgressBar();
-				jfxPanel = new JFXPanel();  
 				Stage stage = new Stage();  
 				Group root = new Group();  
 				Scene scene = new Scene(root,80,20);  
@@ -36,23 +44,39 @@ public class Help extends JPanel {
 				progressBar.setPrefSize(800, 10);
 				children.addAll(browser,progressBar);                     
 				jfxPanel.setScene(scene);  
-				SuperGoodUI.frame.getContentPane().add(jfxPanel, BorderLayout.CENTER);
-				SuperGoodUI.frame.setLocationRelativeTo(null);
-				SuperGoodUI.frame.setVisible(true);	
-				SuperGoodUI.frame.revalidate();
-				SuperGoodUI.frame.repaint();
+			}  
+		}); 
+		setLayout(new BorderLayout());  
+		add(jfxPanel, BorderLayout.CENTER);      
+	}
+	public  void showHelp() {
+
+		SwingUtilities.invokeLater(new Runnable() {  
+			@Override
+			public void run() {  
+				frame = new JFrame("Help");  
+				frame.getContentPane().add(new Help());  
+				frame.setMinimumSize(new Dimension(800, 600));  
+				frame.setLocationRelativeTo(null);
+				frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);  
+				frame.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosing(WindowEvent evt) {
+						ControlPanel.havereadh = true;
+						ControlPanel.isReadingHelp = false;
+						ControlPanel.allButton[4].setVisible(false);
+						ControlPanel.allButton[3].setVisible(true);
+						frame.dispose();
+					}
+				});
+				frame.setVisible(true);  
 			}  
 		});    
 
 	}
 
-	public static void closeHelp() {
-		SuperGoodUI.frame.getContentPane().remove(jfxPanel);
-		SuperGoodUI.frame.setLocationRelativeTo(null);
-		SuperGoodUI.frame.setVisible(true);	
-		SuperGoodUI.frame.revalidate();
-		SuperGoodUI.frame.repaint();
-
+	public static  void closeHelp(){
+		frame.dispose();
 	}
 
 }
