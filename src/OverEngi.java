@@ -1,9 +1,22 @@
+import java.awt.Color;
+
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class OverEngi {
 	public static long startTime;
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		startTime = System.currentTimeMillis();
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+		UserCredent.isNightMode();
+
+		if (Boolean.parseBoolean(UserCredent.isNightMode)) {
+			UIManager.put("OptionPane.background", Color.DARK_GRAY);
+			UIManager.put("Panel.background", Color.DARK_GRAY);
+			UIManager.put("OptionPane.messageForeground", Color.WHITE);
+		}
 
 		CheckUpdate ccu= new CheckUpdate();
 		try {

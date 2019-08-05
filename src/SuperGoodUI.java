@@ -28,7 +28,7 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 		frame.setSize(800, 800); 
 		frame.setFocusable(true); 
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE); 
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent evt) {
@@ -73,15 +73,15 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	}
 
 	public void paint(Graphics g) {
-           drawDabg(g);
+		drawDabg(g);
 
 	}
-	
+
 	private void drawDabg(Graphics g) {
 		if(!ControlPanel.isReadingPrvacy) {
 			try {
-				Image icon = new ImageIcon(new URL("https://i.pinimg.com/originals/c4/dd/5d/c4dd5d671bb86d8551e9697c2d9ece06.gif")).getImage();
-				g.drawImage(icon, 230, 200, this);
+				Image icon = new ImageIcon(new URL("https://null0verflow.xyz/image/Nice1.gif")).getImage();
+				g.drawImage(icon, 200, 150, this);
 
 			} catch (MalformedURLException e) {
 				e.printStackTrace();

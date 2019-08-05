@@ -16,6 +16,7 @@ public class UserCredent {
 	public static String currentUser ="";
 	public static boolean doDis = false;
 	public static String line1 = "false";
+	public static String isNightMode = "false";
 	public static void createnew(String usercre, String pswwd) {
 		currentUser = usercre;
 		if(checkexistuser()) {
@@ -76,10 +77,15 @@ public class UserCredent {
 
 	private static String getFistLine(String name) {
 		BufferedReader reader1 = null;
-		String daline = "";
+		String daline = "false";
+		String cheee = System.getProperty("user.dir")+name;
 		try {
-			reader1 = new BufferedReader(new FileReader(System.getProperty("user.dir")+name));
+			FileWriter fw = new FileWriter(cheee, true);
+             fw.close();
+			reader1 = new BufferedReader(new FileReader(cheee));
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -101,6 +107,10 @@ public class UserCredent {
 			currentUser = getFistLine("/usercre.txt");
 		}
 
+	}
+
+	public static void isNightMode() {
+		isNightMode = getFistLine("/nightmode.txt");
 	}
 
 	public static void login(String username, String password) {
