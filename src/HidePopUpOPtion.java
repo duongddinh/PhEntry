@@ -10,19 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class HidePopUpOPtion extends JPanel implements ActionListener{
+public class HidePopUpOPtion extends EssentialFunctions implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	JFrame frame = new JFrame();
-	public static boolean hideAllP = false;
-	public static boolean hideRP = false;
-	public static boolean hideNSPP = false;
-	public static boolean hideNRP = false;
-
-	public static JCheckBox allbocs[] = new JCheckBox[4];
-
+	JFrame frameHide = new JFrame();
 	JLabel instruc1[] = new JLabel[4];
 	public HidePopUpOPtion() {
-		frame = new JFrame("Hide pop Up options"); 
+		frameHide = new JFrame("Hide pop Up options"); 
 		allbocs[0] = new JCheckBox("Hide ALL popUp");
 		allbocs[1] = new JCheckBox("Hide recommeded popUp");
 		allbocs[2] = new JCheckBox("Hide \"Not show password\" recommendation popUp");
@@ -43,19 +36,19 @@ public class HidePopUpOPtion extends JPanel implements ActionListener{
 		for(int i=0; i< allbocs.length; allbocs[i++].addActionListener(this));
 		for(int i=0; i< instruc1.length; panel.add(instruc1[i++]));
 		for(int i=0; i< instruc1.length; instruc1[i++].setForeground(Color.RED));
-		frame.setResizable(false);
-		frame.setSize(600, 200); 
-		frame.setFocusable(true); 
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-		frame.addWindowListener(new WindowAdapter() {
+		frameHide.setResizable(false);
+		frameHide.setSize(600, 200); 
+		frameHide.setFocusable(true); 
+		frameHide.setLocationRelativeTo(null);
+		frameHide.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		frameHide.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent evt) {
-				frame.dispose();
+				frameHide.dispose();
 			}
 		});
-		frame.add(panel);
-		frame.setVisible(true); 
+		frameHide.add(panel);
+		frameHide.setVisible(true); 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -11,17 +11,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class SuperGoodUI extends JPanel implements ActionListener{
+public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 	private static final long serialVersionUID = 1L;
-	public static JFrame frame;
-	public static boolean Accepted = false;
-	public static JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
-	WriteLogF wl = new WriteLogF();
+
 	public SuperGoodUI() {
 		frame = new JFrame("Nice register UI");  
 		frame.setResizable(false);
@@ -63,10 +58,10 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	private void periodicPop() {
 		if(!HidePopUpOPtion.hideRP)
 			if(Math.random() < 0.5) {
-				ControlPanel.popUp("Remeber to rate this app 5 stars on the store!!!","Improtant");
+				popUp("Remeber to rate this app 5 stars on the store!!!","Improtant");
 			}
 			else {
-				ControlPanel.popUp("We don't use cookies, so you need to accept by clicking ok!!","Important");
+				popUp("We don't use cookies, so you need to accept by clicking ok!!","Important");
 
 			}
 
@@ -78,13 +73,14 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	}
 
 	private void drawDabg(Graphics g) {
-		if(!ControlPanel.isReadingPrvacy) {
+		if(!isReadingPrvacy) {
 			try {
 				Image icon = new ImageIcon(new URL("https://null0verflow.xyz/image/Nice1.gif")).getImage();
 				g.drawImage(icon, 200, 150, this);
 
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
+				wl.writeLog(e.toString());
 			}
 		}	
 	}
@@ -93,12 +89,12 @@ public class SuperGoodUI extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {	
 		if(privacyP.isSelected()) {
-			if(!HidePopUpOPtion.hideRP)
-				ControlPanel.popUp("You gotta accept the terms and conditions to continue", "About");
+			if(!hideRP)
+				popUp("You gotta accept the terms and conditions to continue", "About");
 			Accepted = false;
 		} else {
-			if(!HidePopUpOPtion.hideRP)
-				ControlPanel.popUp("Make sure you read the terms and conditions\n are you sure you accept it?", "About");
+			if(!hideRP)
+				popUp("Make sure you read the terms and conditions\n are you sure you accept it?", "About");
 			Accepted = true;
 
 		}		

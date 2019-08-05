@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class BruteForce {
+	static WriteLogF wl = new WriteLogF();
 	private static Frame bobJFrame;
 
 	public static void doingit() {
@@ -32,18 +33,23 @@ public class BruteForce {
 				while (line != null) {
 					if(UserCredent.getHash(line).equals(getPass())) {
 						ControlPanel.popUp("The password is: "+ line, "Password found!!");
+						System.out.println(line+": "+ UserCredent.getHash(line) + "vs "+ getPass());
+						wl.writeLog("The password is: "+ line);
 						reader.close();
 						return;
 					}
 					line = reader.readLine();
-
+				}
+				if(!found) {
+					ControlPanel.popUp("Cannot find the password in the dictionary you provided", "Password Not found!!");
+					wl.writeLog("Cannot find the password in the dictionary you provided");
 
 				}
-				if(!found)
-					ControlPanel.popUp("Cannot find the password in the dictionary you provided", "Password Not found!!");
 				reader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+				wl.writeLog(e.toString());
+
 			}
 		}
 	}
@@ -64,6 +70,7 @@ public class BruteForce {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			wl.writeLog(e.toString());
 		}
 		return password;
 

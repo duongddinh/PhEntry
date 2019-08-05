@@ -6,15 +6,15 @@ import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 
-public class ShowPrivacyPo {
-
+public class ShowPrivacyPo extends EssentialFunctions {
+	private static final long serialVersionUID = 1L;
 	static JScrollPane scrollPane ;
 	public static void close() {
-		SuperGoodUI.frame.getContentPane().remove(scrollPane);
-		SuperGoodUI.frame.setLocationRelativeTo(null);
-		SuperGoodUI.frame.setVisible(true);	
-		SuperGoodUI.frame.revalidate();
-		SuperGoodUI.frame.repaint();
+		frame.getContentPane().remove(scrollPane);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);	
+		frame.revalidate();
+		frame.repaint();
 
 	}
 	
@@ -141,9 +141,9 @@ public class ShowPrivacyPo {
 				Document doc = kit.createDefaultDocument();
 				jEditorPane.setDocument(doc);
 				jEditorPane.setText(htmlString);
-				SuperGoodUI.frame.getContentPane().add(scrollPane, BorderLayout.WEST);
-				SuperGoodUI.frame.setLocationRelativeTo(null);
-				SuperGoodUI.frame.setVisible(true);		  
+				frame.getContentPane().add(scrollPane, BorderLayout.WEST);
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);		  
 				}
 		});
 	}

@@ -11,12 +11,9 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.xml.bind.DatatypeConverter;
 
-public class UserCredent {
-	public static boolean loginS = false;
-	public static String currentUser ="";
-	public static boolean doDis = false;
-	public static String line1 = "false";
-	public static String isNightMode = "false";
+public class UserCredent extends EssentialFunctions{
+	private static final long serialVersionUID = 1L;
+
 	public static void createnew(String usercre, String pswwd) {
 		currentUser = usercre;
 		if(checkexistuser()) {
@@ -28,12 +25,14 @@ public class UserCredent {
 				bw = new BufferedWriter(fw);
 				bw.write(usercre+"\n");
 				bw.write(getHash(pswwd)+"\n");
-				ControlPanel.popUp("Successfully created an account", "Nice!");
-				ControlPanel.popUp("Logged in", "Log in successfully");
+				popUp("Successfully created an account", "Nice!");
+				popUp("Logged in", "Log in successfully");
+				wl.writeLog("Created an account");
 				doDis = true;
 			} catch (IOException e2) {
 				e2.printStackTrace();
-				ControlPanel.popUp("Task failed successfully", "Not Nice!");
+				wl.writeLog(e2.toString());
+				popUp("Task failed successfully", "Not Nice!");
 
 			} finally {
 				try {
@@ -43,10 +42,12 @@ public class UserCredent {
 						fw.close();
 				} catch (IOException ex) {
 					ex.printStackTrace();
+					wl.writeLog(ex.toString());
+
 				}
 			}
 		} else {
-			if(ControlPanel.confirm("You already have an account, you cannot create new\n Do you want to remove current User can create new?")==0) {
+			if(confirm("You already have an account, you cannot create new\n Do you want to remove current User can create new?")==0) {
 				removeUser();
 			}
 		}
@@ -68,37 +69,13 @@ public class UserCredent {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			wl.writeLog(e.toString());
+
 		}
 		if(sb.equals(null)||String.valueOf(sb).equals("")||String.valueOf(sb).equals(" ")) {
 			return true;
 		}
 		return false;
-	}
-
-	private static String getFistLine(String name) {
-		BufferedReader reader1 = null;
-		String daline = "false";
-		String cheee = System.getProperty("user.dir")+name;
-		try {
-			FileWriter fw = new FileWriter(cheee, true);
-             fw.close();
-			reader1 = new BufferedReader(new FileReader(cheee));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			daline = reader1.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			reader1.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return daline;
 	}
 
 	public static void keepLogged() {
@@ -107,10 +84,6 @@ public class UserCredent {
 			currentUser = getFistLine("/usercre.txt");
 		}
 
-	}
-
-	public static void isNightMode() {
-		isNightMode = getFistLine("/nightmode.txt");
 	}
 
 	public static void login(String username, String password) {
@@ -129,11 +102,13 @@ public class UserCredent {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			wl.writeLog(e.toString());
+
 		}
 		if (!username.equals(userCre[0]) ||!getHash(password).equals(userCre[1]) ){
-			ControlPanel.popUp("Wrong username or password\nIf you don't have an account, you can register new account", "Log in failed successfully");
+			popUp("Wrong username or password\nIf you don't have an account, you can register new account", "Log in failed successfully");
 		} else {
-			ControlPanel.popUp("Logged in", "Log in successfully");
+			popUp("Logged in", "Log in successfully");
 			loginS = true;
 			currentUser = userCre[0];
 		}
@@ -145,10 +120,13 @@ public class UserCredent {
 			writer = new PrintWriter(System.getProperty("user.dir")+"/usercre.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			wl.writeLog(e.toString());
+
 		}
 		writer.print("");
 		writer.close();
-		ControlPanel.popUp("Removed user", "removed successfully");
+		wl.writeLog("Removed user");
+		popUp("Removed user", "removed successfully");
 
 	}
 
@@ -158,6 +136,8 @@ public class UserCredent {
 			md = MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
+			wl.writeLog(e.toString());
+
 		}
 		byte[] digest = md.digest(pssd.getBytes(StandardCharsets.UTF_8));
 		return DatatypeConverter.printHexBinary(digest).toLowerCase();

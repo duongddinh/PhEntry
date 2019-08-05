@@ -1,6 +1,5 @@
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,38 +11,24 @@ import java.util.TimerTask;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
-public class ControlPanel extends JPanel  implements ActionListener{
+public class ControlPanel extends EssentialFunctions  implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JTextField username;
 	private JPasswordField psswd;
-	public static JButton allButton[] = new JButton[12];
 	private long tStart;
 	private long tStart2;
-	public static boolean isReadingPrvacy = false;
 	private boolean isReadingTerms = false;
-	public static boolean isReadingHelp = false;
-	public boolean havereadp = false;
-	public static boolean havereadh = false;
-	public boolean havereadt = false;
-	private JLabel currentUser = new JLabel();
+	private JLabel currentUserA = new JLabel();
 	private JLabel aboutPassord = new JLabel("Password must contain more than 8 characters, sepcial characters, capital letters, number");
-
 	private JCheckBox cb = new JCheckBox("Not show password");
-	public JCheckBox keepLogged = new JCheckBox("Keep Logged in");
-	public JCheckBox playsound = new JCheckBox("Play sound");
-	public JCheckBox darkmode = new JCheckBox("Dark-mode");
-
 	private static boolean nightmode = false;
 	private boolean soundfx = false;
-	public static boolean keepLogg = false;
-	public static boolean readterms = false;
+
 
 	public ControlPanel() {
 		allButton[0] = new JButton("Register because I don't have an account");
@@ -99,9 +84,9 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		allButton[6].setVisible(false);
 		allButton[8].setVisible(false);
 		UserCredent.keepLogged();
-		darkmode.setSelected(Boolean.parseBoolean(UserCredent.isNightMode));
-		keepLogged.setSelected(Boolean.parseBoolean(UserCredent.line1));
-		if (Boolean.parseBoolean(UserCredent.line1)) {
+		darkmode.setSelected(Boolean.parseBoolean(isNightMode));
+		keepLogged.setSelected(Boolean.parseBoolean(line1));
+		if (Boolean.parseBoolean(line1)) {
 			loggedIN();
 		}
 
@@ -123,8 +108,8 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		for (int i=0; i< allButton.length; allButton[i++].setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)))));
 		for (int i=0; i< allButton.length; allButton[i++].setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)))));
 
-		currentUser.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
-		currentUser.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
+		currentUserA.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
+		currentUserA.setBackground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 		aboutPassord.setForeground(new Color(0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1)), 0 + (int)(Math.random() * ((255 - 0) + 1))));
 	}
 
@@ -191,11 +176,12 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		cb.setVisible(false);
 		allButton[9].setVisible(false);
 		keepLogged.setVisible(false);
-		currentUser = new JLabel("Welcome back, "+UserCredent.currentUser);
-		this.add(currentUser);
-		SuperGoodUI.privacyP.setVisible(false);
-		UserCredent.doDis = false;
+		currentUserA = new JLabel("Welcome back, "+ currentUser);
+		this.add(currentUserA);
+		privacyP.setVisible(false);
+		doDis = false;
 		aboutPassord.setVisible(false);
+		wl.writeLog("Logged in as: "+ currentUser);
 	}
 
 	public void WriteInfo(String where, boolean trueorfalse) {
@@ -219,12 +205,14 @@ public class ControlPanel extends JPanel  implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand(); 
 		if(soundfx) {
-			PlaySound.play();
+			PlaySound ps = new PlaySound();
+			ps.play();
+		
 		}
+				
 		if(darkmode.isSelected()) {
 			nightmode = true;
 			WriteInfo("/nightmode.txt", nightmode);
-			restart();
 		}
 		else {
 			nightmode = false;
@@ -264,28 +252,26 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				if (havereadh && havereadp && havereadt) {
 					if (String.valueOf(psswd.getPassword()).length() >=8 && checkNumInPass() && checkSpecialInPass()&& checkLowerCInPass() && checkUpperCInPass() && SuperGoodUI.Accepted) {
 						UserCredent.createnew(username.getText(),String.valueOf(psswd.getPassword()));
-
-						if(UserCredent.doDis) {
+						if(doDis) {
 							loggedIN();
 						}
 
-
 					} else {
 						if (String.valueOf(psswd.getPassword()).length() <8 ) {
-							if(!HidePopUpOPtion.hideNRP)
+							if(!hideNRP)
 								popUp("Your password needs atleast 8 characters","Password is not secured!!");
 						}
-						if (!SuperGoodUI.Accepted) {
-							if(!HidePopUpOPtion.hideNRP)
+						if (!Accepted) {
+							if(!hideNRP)
 								popUp("Accept terms and condition to continue","Need to accept");
 
 						}
-						if(!HidePopUpOPtion.hideRP)
+						if(!hideRP)
 							popUp("Your password is not strong enough\nMake sure your password meets the criteria","password is not secured");
 					}
 
 				} else {
-					if(!HidePopUpOPtion.hideNRP)
+					if(!hideNRP)
 						popUp("You haven't read help/terms and conditions/privacy policy\nTherefore, you can't continue\n We want to make sure you understand everything", "warning");
 				}
 			}
@@ -354,7 +340,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				allButton[5].setVisible(false);
 				allButton[6].setVisible(true);
 			} else {
-				if(!HidePopUpOPtion.hideNRP)
+				if(!hideNRP)
 					popUp("dude, keep reading", "Keep reading");}
 
 		}
@@ -368,7 +354,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				allButton[5].setVisible(true);
 				allButton[6].setVisible(false);
 			} else {
-				if(!HidePopUpOPtion.hideNRP)
+				if(!hideNRP)
 					popUp("There is no way you read that fast, keep reading\n"+(tEnd2 - tStart2)/1000.0 +"/"+300+" secs", "Keep reading");
 
 			}
@@ -376,7 +362,6 @@ public class ControlPanel extends JPanel  implements ActionListener{
 		}
 
 		if (s.equals("Log out because I don't want to log in anymore")) {
-
 			allButton[0].setVisible(true);
 			allButton[7].setVisible(true);
 			allButton[8].setVisible(false);
@@ -385,10 +370,11 @@ public class ControlPanel extends JPanel  implements ActionListener{
 			cb.setVisible(true);
 			allButton[9].setVisible(true);
 			keepLogged.setVisible(true);
-			this.remove(currentUser);
-			UserCredent.loginS=false;
-			SuperGoodUI.privacyP.setVisible(true);
+			this.remove(currentUserA);
+			loginS=false;
+			privacyP.setVisible(true);
 			aboutPassord.setVisible(true);
+			wl.writeLog("Logged out");
 		}
 		if(s.equals("Close Terms Conditions")) {
 
@@ -401,7 +387,7 @@ public class ControlPanel extends JPanel  implements ActionListener{
 				allButton[1].setVisible(true);
 			}
 			else {
-				if(!HidePopUpOPtion.hideNRP)
+				if(!hideNRP)
 					popUp("There is no way you read that fast, keep reading\n"+(tEnd - tStart)/1000.0 +"/"+300+" secs", "Keep reading");
 			}
 
@@ -409,15 +395,5 @@ public class ControlPanel extends JPanel  implements ActionListener{
 
 	}
 
-	public static void popUp(String todis, String title) {
-		if (!HidePopUpOPtion.hideAllP) {
-			JOptionPane.showMessageDialog((Component) null, todis,
-					title, JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
 
-	public static int confirm(String todis) {
-		return JOptionPane.showConfirmDialog((Component) null, todis,
-				"Confirm", JOptionPane.YES_NO_OPTION);
-	}
 }

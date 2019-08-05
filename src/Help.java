@@ -15,15 +15,14 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 
-public class Help extends JPanel {
+public class Help extends EssentialFunctions {
 
 	private static final long serialVersionUID = 1L;
-	private static JFrame frame;
+	private static JFrame frameHelp;
 	JFXPanel jfxPanel;
 	public Help() {
 		jfxPanel = new JFXPanel();  
@@ -54,29 +53,29 @@ public class Help extends JPanel {
 		SwingUtilities.invokeLater(new Runnable() {  
 			@Override
 			public void run() {  
-				frame = new JFrame("Help");  
-				frame.getContentPane().add(new Help());  
-				frame.setMinimumSize(new Dimension(800, 600));  
-				frame.setLocationRelativeTo(null);
-				frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);  
-				frame.addWindowListener(new WindowAdapter() {
+				frameHelp = new JFrame("Help");  
+				frameHelp.getContentPane().add(new Help());  
+				frameHelp.setMinimumSize(new Dimension(800, 600));  
+				frameHelp.setLocationRelativeTo(null);
+				frameHelp.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);  
+				frameHelp.addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosing(WindowEvent evt) {
 						ControlPanel.havereadh = true;
 						ControlPanel.isReadingHelp = false;
 						ControlPanel.allButton[4].setVisible(false);
 						ControlPanel.allButton[3].setVisible(true);
-						frame.dispose();
+						frameHelp.dispose();
 					}
 				});
-				frame.setVisible(true);  
+				frameHelp.setVisible(true);  
 			}  
 		});    
 
 	}
 
 	public static  void closeHelp(){
-		frame.dispose();
+		frameHelp.dispose();
 	}
 
 }
