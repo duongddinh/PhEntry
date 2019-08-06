@@ -18,7 +18,7 @@ abstract class EssentialFunctions extends JPanel {
 	protected static boolean havereadh = false;
 	protected boolean havereadt = false;
 	protected static boolean isReadingPrvacy = false;
-	protected static JButton allButton[] = new JButton[12];
+	protected static JButton allButton[] = new JButton[14];
 	protected static boolean keepLogg = false;
 	protected static boolean readterms = false;
 	protected JCheckBox keepLogged = new JCheckBox("Keep Logged in");
@@ -38,6 +38,7 @@ abstract class EssentialFunctions extends JPanel {
 	protected static JCheckBox allbocs[] = new JCheckBox[4];
 	protected static JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
 	protected static WriteLogF wl = new WriteLogF();
+
 	protected static void popUp(String todis, String title) {
 		if (!HidePopUpOPtion.hideAllP) {
 			JOptionPane.showMessageDialog((Component) null, todis,

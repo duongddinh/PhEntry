@@ -1,0 +1,44 @@
+<title>NiceUI</title>
+<div id ="lol">
+<center><h1><p id ="hello"></p></h1></center>
+</div>
+<div id = "show">
+<script src='https://redditjs.com/post.js'></script>
+<script src='https://redditjs.com/subreddit.js'  data-subreddit='ProgrammerHumor' data-height='500' data-width='700' data-sort='hot' data-theme='dark' data-timeframe='month' data-subreddit-mode='grid'></script>
+</div>
+<script>
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+var username = getUrlVars()["username"];
+var passwordServer = getUrlVars()["password"];
+var content = document.getElementById("show");
+var checkdc = true;
+
+if (username == undefined){
+    username = "You need to login to continue";
+    checkdc = false;
+}
+
+if (passwordServer != "thisisnotapass"){
+    username = "wrong password!"
+    checkdc=false;
+
+}
+
+if(checkdc){
+       content.style.display = "block";
+
+} else {
+  content.style.display = "none";
+
+}
+    document.getElementById("hello").innerHTML = "Hello, " + username;
+
+</script>
+
+

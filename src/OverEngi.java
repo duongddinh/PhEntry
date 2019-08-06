@@ -3,11 +3,14 @@ import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import javafx.application.Platform;
+
 public class OverEngi extends EssentialFunctions {
 	private static final long serialVersionUID = 1L;
 	public static long startTime;
 
 	public static void main(String args[]) {
+		Platform.setImplicitExit(false);
 		startTime = System.currentTimeMillis();
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

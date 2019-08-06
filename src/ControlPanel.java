@@ -28,7 +28,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 	private JCheckBox cb = new JCheckBox("Not show password");
 	private static boolean nightmode = false;
 	private boolean soundfx = false;
-
+    private boolean initialCD = false;
+	BrowseLoggedIn bb = new BrowseLoggedIn();
 
 	public ControlPanel() {
 		allButton[0] = new JButton("Register because I don't have an account");
@@ -43,6 +44,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[9] = new JButton("Auto-Generate password");
 		allButton[10] = new JButton("Hide popUp");
 		allButton[11] = new JButton("Forget password");
+		allButton[12] = new JButton("For Advanced User");
+		allButton[13] = new JButton("Play game instead because I don't have internet connection.");
 
 		for(int i=0; i< allButton.length; allButton[i++].addActionListener(this));
 		for(int i=0; i< allButton.length; allButton[i++].setOpaque(true));
@@ -68,7 +71,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		playsound.addActionListener(this);
 		darkmode.addActionListener(this);
 
-		this.setPreferredSize(new Dimension(50,190));
+		this.setPreferredSize(new Dimension(50,240));
 		this.setBackground(new Color(0, 0, 139));  
 		this.add(username);
 		this.add(psswd);
@@ -84,6 +87,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[6].setVisible(false);
 		allButton[8].setVisible(false);
 		UserCredent.keepLogged();
+		initialCD = Boolean.parseBoolean(isNightMode);
 		darkmode.setSelected(Boolean.parseBoolean(isNightMode));
 		keepLogged.setSelected(Boolean.parseBoolean(line1));
 		if (Boolean.parseBoolean(line1)) {
@@ -182,6 +186,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		doDis = false;
 		aboutPassord.setVisible(false);
 		wl.writeLog("Logged in as: "+ currentUser);
+		bb.doingit();
 	}
 
 	public void WriteInfo(String where, boolean trueorfalse) {
@@ -209,7 +214,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			ps.play();
 		
 		}
-				
+		
 		if(darkmode.isSelected()) {
 			nightmode = true;
 			WriteInfo("/nightmode.txt", nightmode);
@@ -217,6 +222,10 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		else {
 			nightmode = false;
 			WriteInfo("/nightmode.txt", nightmode);
+		}
+		
+		if (nightmode != initialCD) {
+			restart();
 		}
 
 		if(keepLogged.isSelected()) {
@@ -375,6 +384,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			privacyP.setVisible(true);
 			aboutPassord.setVisible(true);
 			wl.writeLog("Logged out");
+			bb.remove();
 		}
 		if(s.equals("Close Terms Conditions")) {
 

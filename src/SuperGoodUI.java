@@ -1,16 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Graphics;
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -73,16 +71,7 @@ public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 	}
 
 	private void drawDabg(Graphics g) {
-		if(!isReadingPrvacy) {
-			try {
-				Image icon = new ImageIcon(new URL("https://null0verflow.xyz/image/Nice1.gif")).getImage();
-				g.drawImage(icon, 200, 150, this);
 
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				wl.writeLog(e.toString());
-			}
-		}	
 	}
 
 
