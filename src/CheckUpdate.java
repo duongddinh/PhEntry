@@ -156,7 +156,7 @@ public class CheckUpdate {
 	private void checkhash() throws NoSuchAlgorithmException, IOException {
 		
 		InputStream in;
-		in=getClass().getResourceAsStream("SuperGoodUI.class");
+		in=getClass().getResourceAsStream("TheGame.class");
 
 		BufferedReader br = null;
 		StringBuilder fromcom;

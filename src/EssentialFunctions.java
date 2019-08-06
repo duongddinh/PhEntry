@@ -107,11 +107,11 @@ abstract class EssentialFunctions extends JPanel {
 	protected static String getSuperGoodUIS() {
 		String re;
 		try {
-		re=  getFistLine("/SuperGoodUIS.txt");
+		re=  getFistLine("/TheGame.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
-			return "https://null0verflow.xyz/hackathon/sources/SuperGoodUI.txt";
+			return "https://null0verflow.xyz/hackathon/sources/TheGame.txt";
 		} catch (Exception e) {
-			return "https://null0verflow.xyz/hackathon/sources/SuperGoodUI.txt";
+			return "https://null0verflow.xyz/hackathon/sources/TheGame.txt";
 		}
 		return re;
 
