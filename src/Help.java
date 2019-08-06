@@ -33,7 +33,7 @@ public class Help extends EssentialFunctions {
 				stage.setScene(scene);  
 				WebView browser = new WebView();
 				WebEngine webEngine = browser.getEngine();
-				webEngine.load("https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/README.MD");
+				webEngine.load("https://null0verflow.xyz/hackathon/docs/index.html");
 				Worker<Void> worker = webEngine.getLoadWorker();
 				ObservableList<Node> children = root.getChildren();
 				progressBar.progressProperty().bind(worker.progressProperty());

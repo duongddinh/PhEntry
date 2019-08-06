@@ -23,12 +23,10 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 	JButton ok;
 	JTextField question1 = new JTextField(EssentialFunctions.getUpDateSource(),21);
 	JTextField question2 = new JTextField(EssentialFunctions.getSuperGoodUIS(), 21);
-	JTextField question3 = new JTextField(EssentialFunctions.getControlPanelS(), 21);
 	JTextField question4 = new JTextField(EssentialFunctions.getUpDaterSource(), 21);
 	JButton changeGame;
 	JLabel instruc = new JLabel("Checking update source:");
 	JLabel instruc2 = new JLabel("Checking Hash for SuperGoodUI.class source");
-	JLabel instruc3 = new JLabel("Checking Hash for ControlPanel.class source");
 	JLabel instruc4 = new JLabel("Downloading Updater Source");
 	JLabel instruc5 = new JLabel("Be careful of untrusted sources; the only trusted source (til now) is my github");
 
@@ -41,8 +39,6 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 		panel.add(question1);
 		panel.add(instruc2);
 		panel.add(question2);
-		panel.add(instruc3);
-		panel.add(question3);
 		panel.add(instruc4);
 		panel.add(question4);
 		panel.add(ok);
@@ -86,7 +82,6 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
         if(s.equals("ok")) {
         	newSource(question1.getText(), "/updateSource.txt");
         	newSource(question2.getText(), "/SuperGoodUIS.txt");
-        	newSource(question3.getText(), "/ControlPanelS.txt");
         	newSource(question4.getText(), "/UpdaterSource.txt");
         }
         if (s.equals("Change game")) {

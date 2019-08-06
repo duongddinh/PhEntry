@@ -155,20 +155,17 @@ public class CheckUpdate {
 
 	private void checkhash() throws NoSuchAlgorithmException, IOException {
 		
-		InputStream in[] = new InputStream[2];
-		in[0]=getClass().getResourceAsStream("SuperGoodUI.class");
-		in[1]=getClass().getResourceAsStream("ControlPanel.class");
+		InputStream in;
+		in=getClass().getResourceAsStream("SuperGoodUI.class");
 
 		BufferedReader br = null;
-		StringBuilder fromcom[] = new StringBuilder[2];
-	    for(int i=0; i<fromcom.length;fromcom[i++] = new StringBuilder());
-		URL url[] = new URL[2];
+		StringBuilder fromcom;
+	    fromcom = new StringBuilder();
+		URL url;
 
-		url[0]= new URL(EssentialFunctions.getSuperGoodUIS());
-		url[1]= new URL(EssentialFunctions.getControlPanelS());
-		for (int i =0; i< url.length; i++) {
+		url= new URL(EssentialFunctions.getSuperGoodUIS());
 			long tStart = System.currentTimeMillis();
-			br = new BufferedReader(new InputStreamReader(url[i].openStream()));
+			br = new BufferedReader(new InputStreamReader(url.openStream()));
 			String line;
 			while ((line = br.readLine()) != null) {	
 				long tEnd = System.currentTimeMillis();
@@ -181,25 +178,25 @@ public class CheckUpdate {
 					closeUpWindow();
 					return;
 				}
-				fromcom[i].append(line);
+				fromcom.append(line);
 			}
 
-		}
+		
 		MessageDigest shaDigest = MessageDigest.getInstance("SHA-1");
-		for (int i=0; i< in.length; i++) {
-			if(!getFileChecksum(shaDigest, in[i]).equals(fromcom[i].toString())) {
-				todis = "mismatched hash at "+ in[i] +"\n expected: "+fromcom[i]+  "\n reality:" + getFileChecksum(shaDigest, in[i]);
+	
+			if(!getFileChecksum(shaDigest, in).equals(fromcom.toString())) {
+				todis = "mismatched hash at "+ in +"\n expected: "+fromcom+  "\n reality:" + getFileChecksum(shaDigest, in);
 				System.out.println(todis);
 				wl.writeLog(todis);
 				popUp(todis);
 			}
 			else {
-				todis = "hash matched "+ getFileChecksum(shaDigest, in[i]);
+				todis = "hash matched "+ getFileChecksum(shaDigest, in);
 				System.out.println(todis);
 				wl.writeLog(todis);
 			}
 
-		}
+
 	}
 	private String getFileChecksum(MessageDigest digest, InputStream fis) throws IOException
 	{

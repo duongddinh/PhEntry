@@ -96,10 +96,10 @@ abstract class EssentialFunctions extends JPanel {
 	   try {
 		re = getFistLine("/updateSource.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null)) {
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/CurrentVersion.txt";
+			return "https://null0verflow.xyz/hackathon/sources/currentVersion.txt";
 		}
 	   } catch (Exception e) {
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/CurrentVersion.txt";
+			return "https://null0verflow.xyz/hackathon/sources/currentVersion.txt";
 
 	   }
 		return re;
@@ -109,34 +109,21 @@ abstract class EssentialFunctions extends JPanel {
 		try {
 		re=  getFistLine("/SuperGoodUIS.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawTheLuigi.txt";
+			return "https://null0verflow.xyz/hackathon/sources/SuperGoodUI.txt";
 		} catch (Exception e) {
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawTheLuigi.txt";
+			return "https://null0verflow.xyz/hackathon/sources/SuperGoodUI.txt";
 		}
 		return re;
 
-	}
-	protected static String getControlPanelS() {
-		String re;
-		try {
-		re =  getFistLine( "/ControlPanelS.txt");
-		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawAsk.txt";
-		} catch (Exception e) {
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawAsk.txt";
-
-		}
-		return re;
-		
 	}
 	protected static String getUpDaterSource() {
 		String re;
 		try {
 		re =  getFistLine("/UpdaterSource.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/Updater/Updater.jar";
+			return "https://null0verflow.xyz/hackathon/sources/ControlPanelS.txt";
 		} catch (Exception e) {
-			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/Updater/Updater.jar";
+			return "https://null0verflow.xyz/hackathon/sources/ControlPanelS.txt";
 		}
 		return re;
 		
