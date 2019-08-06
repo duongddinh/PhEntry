@@ -42,8 +42,8 @@ public class DrawCheck extends Component {
 
 		msg[0] = "You can click \"help\" in the setup menu to get help";
 		msg[1] = "Sometimes, the program does something not expected";
-		msg[2] = "y=ax+b!";
-		msg[3] = "My final AP Calc project inspired me to write this!";
+		msg[2] = "ProgrammerHumor hackathon!";
+		msg[3] = "Array starts at 0!";
 		msg[4] = "If you still see this, the program might crash lol";
 		msg[5] = "You might wanna close this because it is taking too long";
 		msg[6] = "If this stucks at 13% then close this window :v";

@@ -1,10 +1,12 @@
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.net.URI;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,6 +50,8 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 		panel.add(changeGame);
 
 		ok.addActionListener(this);
+		changeGame.addActionListener(this);
+
 		frame.setResizable(false);
 		frame.setSize(600, 300); 
 		frame.setFocusable(true); 
@@ -86,7 +90,15 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
         	newSource(question4.getText(), "/UpdaterSource.txt");
         }
         if (s.equals("Change game")) {
-        	
+    		if (Desktop.isDesktopSupported()) {
+				Desktop desktop = Desktop.getDesktop();
+				try {
+					URI uri = new URI("https://github.com/frychicken/PoolTableSimulator/wiki/Changing-Algorithm");
+					desktop.browse(uri);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
         }
 		
 	}

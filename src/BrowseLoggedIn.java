@@ -16,11 +16,12 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+
 public class BrowseLoggedIn extends EssentialFunctions{
 
 	private static final long serialVersionUID = 1L;
 	JFXPanel jfxPanel;
-    JPanel panel1;
+	JPanel panel1;
 	public  BrowseLoggedIn() {
 		jfxPanel = new JFXPanel();  
 		panel1 = new JPanel();
@@ -38,6 +39,9 @@ public class BrowseLoggedIn extends EssentialFunctions{
 				Worker<Void> worker = webEngine.getLoadWorker();
 				ObservableList<Node> children = root.getChildren();
 				progressBar.progressProperty().bind(worker.progressProperty());
+
+
+
 				progressBar.setPrefSize(800, 10);
 				children.addAll(browser,progressBar);                     
 				jfxPanel.setScene(scene);  
@@ -46,7 +50,7 @@ public class BrowseLoggedIn extends EssentialFunctions{
 		panel1.setLayout(new BorderLayout());  
 		panel1.add(jfxPanel, BorderLayout.CENTER);      
 	}
-	
+
 	public void doingit() {
 		SwingUtilities.invokeLater(new Runnable() {  
 			@Override
@@ -54,20 +58,20 @@ public class BrowseLoggedIn extends EssentialFunctions{
 				frame.getContentPane().add(panel1, BorderLayout.CENTER);  
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);  
-		        frame.revalidate();
-		        frame.repaint();
+				frame.revalidate();
+				frame.repaint();
 			}  
 		}); 
-	
-    
-}
-	
-	public void remove() {
-		frame.getContentPane().remove(panel1);  
-        frame.revalidate();
-        frame.repaint();
+
 
 	}
-  
-	
+
+	public void remove() {
+		frame.getContentPane().remove(panel1);  
+		frame.revalidate();
+		frame.repaint();
+
+	}
+
+
 }

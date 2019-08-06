@@ -1,7 +1,6 @@
 import com.sun.javafx.application.PlatformImpl;
 import java.awt.BorderLayout;
 
-
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.embed.swing.JFXPanel;

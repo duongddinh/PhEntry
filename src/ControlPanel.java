@@ -1,8 +1,11 @@
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Timer;
@@ -26,10 +29,11 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 	private JLabel currentUserA = new JLabel();
 	private JLabel aboutPassord = new JLabel("Password must contain more than 8 characters, sepcial characters, capital letters, number");
 	private JCheckBox cb = new JCheckBox("Not show password");
-	private static boolean nightmode = false;
+	public static boolean nightmode = false;
 	private boolean soundfx = false;
-    private boolean initialCD = false;
+	private boolean initialCD = false;
 	BrowseLoggedIn bb = new BrowseLoggedIn();
+	TheGame ng = new TheGame();
 
 	public ControlPanel() {
 		allButton[0] = new JButton("Register because I don't have an account");
@@ -46,6 +50,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[11] = new JButton("Forget password");
 		allButton[12] = new JButton("For Advanced User");
 		allButton[13] = new JButton("Play game instead because I don't have internet connection.");
+		allButton[14] = new JButton("Quit Game");
+		allButton[15] = new JButton("Play Again");
 
 		for(int i=0; i< allButton.length; allButton[i++].addActionListener(this));
 		for(int i=0; i< allButton.length; allButton[i++].setOpaque(true));
@@ -86,6 +92,9 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[4].setVisible(false);
 		allButton[6].setVisible(false);
 		allButton[8].setVisible(false);
+		allButton[14].setVisible(false);
+		allButton[15].setVisible(false);
+
 		UserCredent.keepLogged();
 		initialCD = Boolean.parseBoolean(isNightMode);
 		darkmode.setSelected(Boolean.parseBoolean(isNightMode));
@@ -199,16 +208,16 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		writer.print(trueorfalse);
 		writer.close();
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand(); 
 		if(soundfx) {
 			PlaySound ps = new PlaySound();
 			ps.play();
-		
+
 		}
-		
+
 		if(darkmode.isSelected()) {
 			nightmode = true;
 			WriteInfo("/nightmode.txt", nightmode);
@@ -217,7 +226,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			nightmode = false;
 			WriteInfo("/nightmode.txt", nightmode);
 		}
-		
+
 		if (nightmode != initialCD) {
 			restart();
 		}
@@ -280,12 +289,68 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			}
 		}
 
-		if(s.equals("For Advanced User")) {
-			
-			new ForAdvancedUser();
-			
+		if(s.equals("Play Again")) {
+			allButton[15].setVisible(false);
+			ng.isDone = false;
+			ng.reset();
+			TheGame.timer.start();
+			frame.revalidate();
+			frame.repaint();
 		}
-		
+
+		if(s.equals("Quit Game")) {
+			allButton[0].setVisible(true);
+			allButton[1].setVisible(true);
+			allButton[3].setVisible(true);
+			allButton[5].setVisible(true);
+			allButton[7].setVisible(true);
+			allButton[9].setVisible(true);
+			allButton[11].setVisible(true);
+			allButton[12].setVisible(true);
+			allButton[13].setVisible(true);
+			allButton[14].setVisible(false);
+			aboutPassord.setVisible(true);
+			frame.getContentPane().remove(ng); 	
+			frame.setLocationRelativeTo(null);
+			frame.setVisible(true);  
+			frame.revalidate();
+			frame.repaint();
+
+		}
+		if(s.equals("Play game instead because I don't have internet connection.")) {
+			for(int i=0; i< allButton.length; allButton[i++].setVisible(false));
+			allButton[14].setVisible(true);
+			allButton[10].setVisible(true);
+			aboutPassord.setVisible(false);
+			ng.isDone = false;
+			ng.reset();
+			frame.getContentPane().add(BorderLayout.CENTER, ng); 	
+			frame.setLocationRelativeTo(null);
+			frame.setVisible(true);  
+			frame.addKeyListener(new KeyAdapter() {
+				public void keyPressed(KeyEvent event) {
+					ng.moveTheTHing(event);
+					if(soundfx) {
+						PlaySound ps = new PlaySound();
+						ps.play();
+
+					}
+				}
+			});
+			if (!ng.isDone)
+				TheGame.timer.start();
+
+			frame.revalidate();
+			frame.repaint();
+		}
+
+
+		if(s.equals("For Advanced User")) {
+
+			new ForAdvancedUser();
+
+		}
+
 		if(s.equals("Auto-Generate password")) {
 
 			new AutoGenQuestion();
