@@ -200,12 +200,6 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		writer.close();
 	}
 	
-	public void restart() {
-		if(confirm("Do you want to restart the program to enact change?") ==0) {
-			System.exit(0);
-		}
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand(); 
@@ -286,6 +280,12 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			}
 		}
 
+		if(s.equals("For Advanced User")) {
+			
+			new ForAdvancedUser();
+			
+		}
+		
 		if(s.equals("Auto-Generate password")) {
 
 			new AutoGenQuestion();

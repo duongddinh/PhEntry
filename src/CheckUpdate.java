@@ -88,7 +88,7 @@ public class CheckUpdate {
 			StringBuilder fromcom = new StringBuilder();
 			try {
 				long tStart = System.currentTimeMillis();
-				URL url = new URL("https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/CurrentVersion.txt");
+				URL url = new URL(EssentialFunctions.getUpDateSource());
 				br = new BufferedReader(new InputStreamReader(url.openStream()));
 				String line;
 				while (((line = br.readLine()) != null) &&check) {
@@ -164,8 +164,8 @@ public class CheckUpdate {
 	    for(int i=0; i<fromcom.length;fromcom[i++] = new StringBuilder());
 		URL url[] = new URL[2];
 
-		url[0]= new URL("https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawTheLuigi.txt");
-		url[1]= new URL("https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawAsk.txt");
+		url[0]= new URL(EssentialFunctions.getSuperGoodUIS());
+		url[1]= new URL(EssentialFunctions.getControlPanelS());
 		for (int i =0; i< url.length; i++) {
 			long tStart = System.currentTimeMillis();
 			br = new BufferedReader(new InputStreamReader(url[i].openStream()));
@@ -220,7 +220,7 @@ public class CheckUpdate {
 	
 	private void updatedapro() {
 		try {
-			URL updaterD = new URL("https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/Updater/Updater.jar");
+			URL updaterD = new URL(EssentialFunctions.getUpDaterSource());
 			ReadableByteChannel ok = Channels.newChannel(updaterD.openStream());
 			FileOutputStream okay = new FileOutputStream(System.getProperty("user.dir")+"Updater.jar");
 			okay.getChannel().transferFrom(ok, 0, Long.MAX_VALUE);

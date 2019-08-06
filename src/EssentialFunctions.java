@@ -39,6 +39,12 @@ abstract class EssentialFunctions extends JPanel {
 	protected static JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
 	protected static WriteLogF wl = new WriteLogF();
 
+	protected void restart() {
+		if(confirm("Do you want to restart the program to enact change?") ==0) {
+			System.exit(0);
+		}
+	}
+	
 	protected static void popUp(String todis, String title) {
 		if (!HidePopUpOPtion.hideAllP) {
 			JOptionPane.showMessageDialog((Component) null, todis,
@@ -84,4 +90,56 @@ abstract class EssentialFunctions extends JPanel {
 	protected static void isNightMode() {
 		isNightMode = getFistLine("/nightmode.txt");
 	}
+	
+	protected static String getUpDateSource() {
+		String re;
+	   try {
+		re = getFistLine("/updateSource.txt");
+		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null)) {
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/CurrentVersion.txt";
+		}
+	   } catch (Exception e) {
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/CurrentVersion.txt";
+
+	   }
+		return re;
+	}
+	protected static String getSuperGoodUIS() {
+		String re;
+		try {
+		re=  getFistLine("/SuperGoodUIS.txt");
+		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawTheLuigi.txt";
+		} catch (Exception e) {
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawTheLuigi.txt";
+		}
+		return re;
+
+	}
+	protected static String getControlPanelS() {
+		String re;
+		try {
+		re =  getFistLine( "/ControlPanelS.txt");
+		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawAsk.txt";
+		} catch (Exception e) {
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/hash/DrawAsk.txt";
+
+		}
+		return re;
+		
+	}
+	protected static String getUpDaterSource() {
+		String re;
+		try {
+		re =  getFistLine("/UpdaterSource.txt");
+		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/Updater/Updater.jar";
+		} catch (Exception e) {
+			return "https://raw.githubusercontent.com/frychicken/PoolTableSimulator/master/Updater/Updater.jar";
+		}
+		return re;
+		
+	}
+	
 }
