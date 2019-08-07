@@ -16,27 +16,23 @@ public class SelectLang extends EssentialFunctions {
 	private static final long serialVersionUID = 1L;
 	JFrame frameHide = new JFrame();
 	JLabel instruc1[] = new JLabel[4];
-	JRadioButton german;
+	JRadioButton english;
 	JRadioButton spanish;
-	JRadioButton italian;
 	ButtonGroup bg;
 	JButton ok;
 	public SelectLang() {
-		frameHide = new JFrame("Credit"); 
+		frameHide = new JFrame("Select Language"); 
 
-		german = new JRadioButton("German"); 
+		english = new JRadioButton("English"); 
 		spanish = new JRadioButton("Spanish"); 
-		italian = new JRadioButton("Italian"); 
 		bg = new ButtonGroup(); 
 		ok = new JButton("ok");
 		JPanel panel = new JPanel();
-		panel.add(german);
+		panel.add(english);
 		panel.add(spanish);
-		panel.add(italian);
 		panel.add(ok);
-		bg.add(german);
+		bg.add(english);
 		bg.add(spanish);
-		bg.add(italian);
  
 
 		frameHide.setResizable(false);
@@ -56,7 +52,7 @@ public class SelectLang extends EssentialFunctions {
 
 			public void actionPerformed(ActionEvent e) 
 			{ 
-				if (german.isSelected()) { 
+				if (english.isSelected()) { 
 					System.out.println("1");
 				} 
 

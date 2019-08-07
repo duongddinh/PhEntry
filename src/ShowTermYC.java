@@ -4,6 +4,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 
 public class ShowTermYC extends EssentialFunctions{
 	private static final long serialVersionUID = 1L;
@@ -26,6 +27,26 @@ public class ShowTermYC extends EssentialFunctions{
 				jEditorPane.setEditable(false);
 				scrollPane = new JScrollPane(jEditorPane);
 				HTMLEditorKit kit = new HTMLEditorKit();
+				StyleSheet styleSheet = kit.getStyleSheet();
+				if(Boolean.parseBoolean(getFistLine("/nightmode.txt"))) {
+				styleSheet.addRule("body { background-color :#00000;}");
+				styleSheet.addRule("h1 {color: #ffffff;}");
+				styleSheet.addRule("h2 {color: #ffffff;}");
+				styleSheet.addRule("p {color: #ffffff;}");
+				styleSheet.addRule("ul {color: #ffffff;}");
+				styleSheet.addRule("li {color: #ffffff;}");
+				styleSheet.addRule("h3 { color: red;}");
+
+				} else {
+					styleSheet.addRule("body { background-color :#ffffff;}");
+					styleSheet.addRule("h1 {color: #000000;}");
+					styleSheet.addRule("h2 {color: #000000;}");
+					styleSheet.addRule("p {color:#000000;}");
+					styleSheet.addRule("ul {color: #000000;}");
+					styleSheet.addRule("li {color:#000000;}");
+					styleSheet.addRule("h3 {  color: red;}");
+
+				}
 				jEditorPane.setEditorKit(kit);
 				String htmlString = "<html>\n"
 						+ "<body>\n"
@@ -33,11 +54,13 @@ public class ShowTermYC extends EssentialFunctions{
 						"\n" + 
 						"<h2>Introduction</h2> \n" + 
 						"  \n" + 
-						"<p>These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Bob accessible at Bob.bob.</p>\n" + 
+						"<p><h3>The terms and conditions is here just to over-engineer the program,<br> but it is important to understand that the program will generate 9 txt files in its current directory to store data.<br>The login here is just for fun to browse r/programmerhumor reddit;<br> please don't use your actual reddit username and password. The password will NOT be sent to the server, it is stored locally<br> That is it! you can ignore the rest of the terms and conditions.</h3></p>"+
+						"\n" +
+						"<p>These Website Standard Terms and Conditions written on this webpage shall manage your use of our website; it is accessible at github.</p>\n" + 
 						"\n" + 
 						"<p>These Terms will be applied fully and affect to your use of this Website.<br> By using this Website, you agreed to accept all terms and conditions written in here. <br>You must not use this Website if you disagree with any of these Website Standard Terms and Conditions. <br>These Terms and Conditions have been generated with the help of the <a href=\"https://www.termsandcondiitionssample.com\">Terms And Conditions Template</a>.</p>\n" + 
 						"\n" + 
-						"<p>Minors or people below 18 years old are not allowed to use this Website.</p>\n" + 
+						"<p>Everybody is allowed to use this Website.</p>\n" + 
 						"\n" + 
 						"<h2>Intellectual Property Rights</h2>\n" + 
 						"\n" + 

@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,6 @@ import javax.swing.WindowConstants;
 
 public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 	private static final long serialVersionUID = 1L;
-
 	public SuperGoodUI() {
 		frame = new JFrame("Nice register UI");  
 		try {
@@ -56,13 +56,14 @@ public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 		frame.add(new ControlPanel(), BorderLayout.NORTH);
 		frame.add(privacyP, BorderLayout.SOUTH);
 		frame.setVisible(true); 
+
 	}
 
 
 	private void periodicPop() {
 		if(!HidePopUpOPtion.hideRP)
 			if(Math.random() < 0.5) {
-				popUp("Remeber to rate this app 5 stars on the store!!!","Improtant");
+				popUp("Remember to rate this app 5 stars on the store!!!","Improtant");
 			}
 			else {
 				popUp("We don't use cookies, so you need to accept by clicking ok!!","Important");
@@ -77,6 +78,10 @@ public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 	}
 
 	private void drawDabg(Graphics g) {
+
+/*
+			Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Nice1.gif"));
+			g.drawImage(icon, 200, 100, this);*/
 
 	}
 

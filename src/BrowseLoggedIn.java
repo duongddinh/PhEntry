@@ -35,7 +35,7 @@ public class BrowseLoggedIn extends EssentialFunctions{
 				stage.setScene(scene);  
 				WebView browser = new WebView();
 				WebEngine webEngine = browser.getEngine();
-				webEngine.load("https://null0verflow.xyz/hackathon/index.html?username="+getFistLine("/usercre.txt")+"&password=thisisnotapass");
+				webEngine.load("https://null0verflow.xyz/hackathon/index.html?username="+getFistLine("/usercre.txt")+"&password=thisisnotapass"+"&dark="+getFistLine("/nightmode.txt"));
 				Worker<Void> worker = webEngine.getLoadWorker();
 				ObservableList<Node> children = root.getChildren();
 				progressBar.progressProperty().bind(worker.progressProperty());

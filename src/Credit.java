@@ -13,7 +13,6 @@ public class Credit extends EssentialFunctions {
 	JLabel instruc1[] = new JLabel[4];
 	public Credit() {
 		frameHide = new JFrame("Credit"); 
-
 		instruc1[0] = new JLabel("Developer: Bob");
 		instruc1[1] = new JLabel("Translate to German: ");
 		instruc1[2] = new JLabel("Translate to Spanish: ");

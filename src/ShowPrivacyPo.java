@@ -5,6 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 
 public class ShowPrivacyPo extends EssentialFunctions {
 	private static final long serialVersionUID = 1L;
@@ -27,11 +28,33 @@ public class ShowPrivacyPo extends EssentialFunctions {
 				jEditorPane.setEditable(false);
 				scrollPane = new JScrollPane(jEditorPane);
 				HTMLEditorKit kit = new HTMLEditorKit();
+				StyleSheet styleSheet = kit.getStyleSheet();
+				if(Boolean.parseBoolean(getFistLine("/nightmode.txt"))) {
+				styleSheet.addRule("body { background-color :#00000;}");
+				styleSheet.addRule("h1 {color: #ffffff;}");
+				styleSheet.addRule("h2 {color: #ffffff;}");
+				styleSheet.addRule("p {color: #ffffff;}");
+				styleSheet.addRule("ul {color: #ffffff;}");
+				styleSheet.addRule("li {color: #ffffff;}");
+				styleSheet.addRule("h3 { color: red;}");
+
+
+				} else {
+					styleSheet.addRule("body { background-color :#ffffff;}");
+					styleSheet.addRule("h1 {color: #000000;}");
+					styleSheet.addRule("h2 {color: #000000;}");
+					styleSheet.addRule("p {color:#000000;}");
+					styleSheet.addRule("ul {color: #000000;}");
+					styleSheet.addRule("li {color:#000000;}");
+					styleSheet.addRule("h3 { color: red;}");
+
+				}
 				jEditorPane.setEditorKit(kit);
 				String htmlString = "<html>\n"
 						+ "<body>\n"
 						+ "<h1>Privacy Policy</h1>\n" + 
 						"\n" + 
+						"<p><h3>Privacy Policy is here just for fun, but you need to understand that the program will NOT sent anything to the server.<br>As such, I do NOT collect any information.<br>That is it, you can ignore the rest of the Privacy Policy</h3></p>"+
 						"\n" + 
 						"<p>Effective date: August 03, 2019</p>\n" + 
 						"\n" + 
@@ -47,7 +70,7 @@ public class ShowPrivacyPo extends EssentialFunctions {
 						"\n" + 
 						"<p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>\n" + 
 						"\n" + 
-						"<h3>Types of Data Collected</h3>\n" + 
+						"<h2>Types of Data Collected</h2>\n" + 
 						"\n" + 
 						"<h4>Personal Data</h4>\n" + 
 						"\n" + 

@@ -1,13 +1,16 @@
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,6 +57,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[15] = new JButton("Play Again");
 		allButton[16] = new JButton("Credit");
 		allButton[17] = new JButton("Change Language");
+		allButton[18] = new JButton("Feedback/Report bug");
 
 		for(int i=0; i< allButton.length; allButton[i++].addActionListener(this));
 		for(int i=0; i< allButton.length; allButton[i++].setOpaque(true));
@@ -291,6 +295,18 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			}
 		}
 
+		if(s.equals("Feedback/Report bug")) {
+			Desktop desktop = Desktop.getDesktop();
+			String message = "mailto:bob@null0verflow.xyz?subject=feedback";
+			URI uri = URI.create(message);
+			try {
+				desktop.mail(uri);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				wl.writeLog(e1.toString());
+			}
+		}
+		
 		if(s.equals("Play Again")) {
 			allButton[15].setVisible(false);
 			ng.isDone = false;
