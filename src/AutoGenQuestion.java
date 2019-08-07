@@ -4,6 +4,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 import java.awt.Color;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -30,6 +32,11 @@ public class AutoGenQuestion extends JPanel  implements ActionListener{
 	JCheckBox checkboc = new JCheckBox("Nah, I don't want to answer");
 	public AutoGenQuestion(){
 		frame = new JFrame("Questions"); 
+		try {
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ok = new JButton("Ok");
 		instruc3.setForeground(Color.RED);
 		panel.add(instruc);

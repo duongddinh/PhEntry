@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -32,6 +33,11 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 
 	public ForAdvancedUser() {
 		frame = new JFrame("Advanced setup"); 
+		try {
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ok = new JButton("Ok");
 		changeGame = new JButton("Change game");
 		instruc5.setForeground(Color.RED);
@@ -88,7 +94,7 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
     		if (Desktop.isDesktopSupported()) {
 				Desktop desktop = Desktop.getDesktop();
 				try {
-					URI uri = new URI("https://github.com/frychicken/PoolTableSimulator/wiki/Changing-Algorithm");
+					URI uri = new URI("https://null0verflow.xyz/hackathon/docs/index.html");
 					desktop.browse(uri);
 				} catch (Exception ex) {
 					ex.printStackTrace();

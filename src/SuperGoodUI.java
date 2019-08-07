@@ -1,6 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Graphics;
-
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -17,6 +17,12 @@ public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 
 	public SuperGoodUI() {
 		frame = new JFrame("Nice register UI");  
+		try {
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+			wl.writeLog(e.toString());
+		}
 		frame.setResizable(false);
 		frame.setSize(800, 800); 
 		frame.setFocusable(true); 

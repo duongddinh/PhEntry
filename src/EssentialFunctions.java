@@ -18,13 +18,13 @@ abstract class EssentialFunctions extends JPanel {
 	protected static boolean havereadh = false;
 	protected boolean havereadt = false;
 	protected static boolean isReadingPrvacy = false;
-	protected static JButton allButton[] = new JButton[16];
+	protected static JButton allButton[] = new JButton[18];
 	protected static boolean keepLogg = false;
 	protected static boolean readterms = false;
 	protected JCheckBox keepLogged = new JCheckBox("Keep Logged in");
 	protected JCheckBox playsound = new JCheckBox("Play sound");
 	protected JCheckBox darkmode = new JCheckBox("Dark-mode");
-	protected static JFrame frame;
+	protected static JFrame frame;	
 	protected static boolean Accepted = false;
 	protected static boolean hideAllP = false;
 	protected static boolean hideRP = false;

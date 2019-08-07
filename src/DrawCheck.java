@@ -11,7 +11,11 @@ public class DrawCheck extends Component {
 	private String msg[] = new String[8];
 	private int f2 =(int)(Math.random() * ((7 - 0) + 1)) + 0;
 	public DrawCheck(JFrame frame) {
-
+		try {
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void paint(Graphics g) {

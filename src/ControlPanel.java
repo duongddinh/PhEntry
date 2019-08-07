@@ -52,6 +52,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[13] = new JButton("Play game instead because I don't have internet connection.");
 		allButton[14] = new JButton("Quit Game");
 		allButton[15] = new JButton("Play Again");
+		allButton[16] = new JButton("Credit");
+		allButton[17] = new JButton("Change Language");
 
 		for(int i=0; i< allButton.length; allButton[i++].addActionListener(this));
 		for(int i=0; i< allButton.length; allButton[i++].setOpaque(true));
@@ -340,18 +342,26 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			if (!ng.isDone)
 				TheGame.timer.start();
 			if (isReadingHelp)
-			Help.closeHelp();
-		    
+				Help.closeHelp();
+
 			bb.remove();
 			if(isReadingPrvacy)
-			ShowPrivacyPo.close();
+				ShowPrivacyPo.close();
 			if(isReadingTerms)
-			ShowTermYC.close();
+				ShowTermYC.close();
 			frame.revalidate();
 			frame.repaint();
 		}
 
 
+
+		if(s.equals("Credit")) {
+			new Credit();
+		}
+
+		if(s.equals("Change Language")) {
+			new SelectLang();
+		}
 		if(s.equals("For Advanced User")) {
 
 			new ForAdvancedUser();
