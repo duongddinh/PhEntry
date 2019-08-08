@@ -100,7 +100,10 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[8].setVisible(false);
 		allButton[14].setVisible(false);
 		allButton[15].setVisible(false);
-
+	     if (oneplz ==0) {
+	        	oneplz = 1;
+	        	frame.add(ms);
+	        }
 		UserCredent.keepLogged();
 		initialCD = Boolean.parseBoolean(isNightMode);
 		darkmode.setSelected(Boolean.parseBoolean(isNightMode));
@@ -202,6 +205,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		aboutPassord.setVisible(false);
 		wl.writeLog("Logged in as: "+ currentUser);
 		bb.doingit();
+		frame.remove(ms);
 	}
 
 	public void WriteInfo(String where, boolean trueorfalse) {
@@ -333,6 +337,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			frame.setVisible(true);  
 			frame.revalidate();
 			frame.repaint();
+			frame.add(ms);
 
 		}
 		if(s.equals("Play game instead because I don't have internet connection.")) {
@@ -342,6 +347,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			aboutPassord.setVisible(false);
 			ng.isDone = false;
 			ng.reset();
+			frame.remove(ms);
 			frame.getContentPane().add(BorderLayout.CENTER, ng); 	
 			frame.setLocationRelativeTo(null);
 			frame.setVisible(true);  
@@ -400,8 +406,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		}
 
 		if(s.equals("Read terms and conditions")&&!isReadingHelp) {
-
 			if (!isReadingPrvacy) {
+				frame.remove(ms);
 				isReadingTerms  = true;
 				tStart = System.currentTimeMillis();
 				ShowTermYC.doit();
@@ -412,9 +418,9 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 					popUp("dude, keep reading.", "Keep reading");}
 		}
 		if(s.equals("help")) {
-
 			isReadingHelp = true;
 			if (!isReadingPrvacy &&!isReadingTerms) {
+				frame.remove(ms);
 				Help welp = new Help();
 				welp.showHelp();
 				allButton[4].setVisible(true);
@@ -424,7 +430,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 					popUp("You haven't done reading yet!", "Keep reading");}
 		}
 		if(s.equals("Close Help")) {
-
+			frame.add(ms);
 			havereadh = true;
 			isReadingHelp = false;
 			Help.closeHelp();
@@ -446,6 +452,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				ShowPrivacyPo.doit();
 				allButton[5].setVisible(false);
 				allButton[6].setVisible(true);
+				frame.remove(ms);
 			} else {
 				if(!hideNRP)
 					popUp("dude, keep reading", "Keep reading");}
@@ -460,6 +467,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				ShowPrivacyPo.close();
 				allButton[5].setVisible(true);
 				allButton[6].setVisible(false);
+				frame.add(ms);
+
 			} else {
 				if(!hideNRP)
 					popUp("There is no way you read that fast, keep reading\n"+(tEnd2 - tStart2)/1000.0 +"/"+300+" secs", "Keep reading");
@@ -483,9 +492,9 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			aboutPassord.setVisible(true);
 			wl.writeLog("Logged out");
 			bb.remove();
+			frame.add(ms);
 		}
 		if(s.equals("Close Terms Conditions")) {
-
 			isReadingTerms  = false;
 			havereadt = true;
 			long tEnd = System.currentTimeMillis();
@@ -493,6 +502,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				ShowTermYC.close();
 				allButton[2].setVisible(false);
 				allButton[1].setVisible(true);
+				frame.add(ms);
 			}
 			else {
 				if(!hideNRP)

@@ -1,6 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,14 +50,11 @@ public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 		timer.scheduleAtFixedRate(task, delay, intevalPeriod);
 		privacyP.setSelected(true);
 		privacyP.addActionListener(this);
-		frame.add(this);
 		frame.add(new ControlPanel(), BorderLayout.NORTH);
 		frame.add(privacyP, BorderLayout.SOUTH);
 		frame.setVisible(true); 
 
 	}
-
-
 	private void periodicPop() {
 		if(!HidePopUpOPtion.hideRP)
 			if(Math.random() < 0.5) {
@@ -71,21 +66,6 @@ public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 			}
 
 	}
-
-	public void paint(Graphics g) {
-		drawDabg(g);
-
-	}
-
-	private void drawDabg(Graphics g) {
-
-/*
-			Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Nice1.gif"));
-			g.drawImage(icon, 200, 100, this);*/
-
-	}
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {	
 		if(privacyP.isSelected()) {

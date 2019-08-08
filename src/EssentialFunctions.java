@@ -38,7 +38,8 @@ abstract class EssentialFunctions extends JPanel {
 	protected static JCheckBox allbocs[] = new JCheckBox[4];
 	protected static JCheckBox privacyP = new JCheckBox("I don't ACCEPT TERMS AND CONDITIONS AND PRIVACY POLICY");
 	protected static WriteLogF wl = new WriteLogF();
-
+	protected MainScreen ms = new MainScreen();
+	protected int oneplz =0;
 	protected void restart() {
 		if(confirm("Do you want to restart the program to enact change?") ==0) {
 			System.exit(0);
