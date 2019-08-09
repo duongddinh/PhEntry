@@ -106,6 +106,7 @@ abstract class EssentialFunctions extends JPanel {
 	   }
 		return re;
 	}
+	
 	protected static String getSuperGoodUIS() {
 		String re;
 		try {
@@ -141,5 +142,18 @@ abstract class EssentialFunctions extends JPanel {
 		writer.print(trueorfalse);
 		writer.close();
 	}
+	
+	public void WriteInfo(String where, int trueorfalse) {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(System.getProperty("user.dir")+where);
+		} catch (FileNotFoundException e2) {
+			e2.printStackTrace();
+		}
+		writer.print(trueorfalse);
+		writer.close();
+	}
+	
+	
 	
 }

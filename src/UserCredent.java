@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -55,24 +56,7 @@ public class UserCredent extends EssentialFunctions{
 	}
 
 	public static boolean checkexistuser() {
-		BufferedReader reader;
-		StringBuilder sb = null;
-		try {
-			reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/usercre.txt"));
-			sb = new StringBuilder();
-			String line = reader.readLine();
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = reader.readLine();
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			wl.writeLog(e.toString());
-
-		}
-		if(sb.equals(null)||String.valueOf(sb).equals("")||String.valueOf(sb).equals(" ")) {
+		if((new File(System.getProperty("user.dir")+"/usercre.txt")).exists()) {
 			return true;
 		}
 		return false;

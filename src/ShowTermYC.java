@@ -8,7 +8,7 @@ import javax.swing.text.html.StyleSheet;
 
 public class ShowTermYC extends EssentialFunctions{
 	private static final long serialVersionUID = 1L;
-	static JScrollPane scrollPane ;
+	static JScrollPane scrollPane;
 	public static void close() {
 		frame.getContentPane().remove(scrollPane);
 		frame.setLocationRelativeTo(null);

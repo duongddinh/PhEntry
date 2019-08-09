@@ -34,6 +34,8 @@ public class SelectLang extends EssentialFunctions {
 		bg.add(english);
 		bg.add(spanish);
  
+		english.setSelected(!Boolean.parseBoolean(getFistLine("/lang.txt")));
+		spanish.setSelected(Boolean.parseBoolean(getFistLine("/lang.txt")));
 
 		frameHide.setResizable(false);
 		frameHide.setSize(200, 100); 

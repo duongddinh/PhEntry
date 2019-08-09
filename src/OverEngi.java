@@ -33,7 +33,7 @@ public class OverEngi extends EssentialFunctions {
 		} catch (Exception e) {
 			e.printStackTrace();
 			wl.writeLog(e.toString());
-			ccu.popUp("Error occurs while loading update");
+			popUp("Error occurs while loading update", "Update");
 			ccu.closeUpWindow();
 		}
 		popUp("This is likely a parody", "disclaimer");

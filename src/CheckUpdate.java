@@ -21,17 +21,17 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
-public class CheckUpdate {
+public class CheckUpdate extends EssentialFunctions{
+	private static final long serialVersionUID = 1L;
 	private boolean stillqm = true;
-	private WriteLogF wl = new WriteLogF();
 	private String todis = "Checking for updates";
-	private JFrame frame; 
+	private JFrame frameH; 
 	private DrawCheck drc;
 	private final Timer t;
 	private boolean check = true;
 	public CheckUpdate(){
-		frame = new JFrame("Checking update"); 
-		drc= new DrawCheck(frame);
+		frameH = new JFrame("Checking update"); 
+		drc= new DrawCheck(frameH);
 		t = new Timer(10, new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//updating variables 
@@ -48,32 +48,27 @@ public class CheckUpdate {
 	}
 
 	public void closeUpWindow() {
-		frame.setVisible(false);  
-		frame.dispose();
+		frameH.setVisible(false);  
+		frameH.dispose();
 		stillqm = false;
-	}
-
-	public void popUp(String todis) {
-		JOptionPane.showMessageDialog((Component) null, todis,
-				"Update", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void checkup() throws Exception {
 
-		frame.getContentPane().add(BorderLayout.CENTER, drc); 
-		frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-		frame.addWindowListener(new WindowAdapter() {
+		frameH.getContentPane().add(BorderLayout.CENTER, drc); 
+		frameH.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		frameH.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent evt) {
 				stillqm = false;
 				check = false;
-				frame.dispose();
+				frameH.dispose();
 			}
 		});
-		frame.setResizable(false);
-		frame.setSize(300, 300); 	
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);  
+		frameH.setResizable(false);
+		frameH.setSize(300, 300); 	
+		frameH.setLocationRelativeTo(null);
+		frameH.setVisible(true);  
 
 		while (stillqm) {
 			try {
@@ -98,7 +93,7 @@ public class CheckUpdate {
 						todis = "Error checking update: Timed out!";
 						System.out.println(todis);
 						wl.writeLog(todis);
-						popUp(todis);
+						popUp(todis, "Update");
 						toRepaint(todis);
 						closeUpWindow();
 						return;
@@ -114,7 +109,7 @@ public class CheckUpdate {
 				todis = "Error: Cannot connect to server!";
 				System.out.println(todis);
 				wl.writeLog(todis);
-				popUp(todis);
+				popUp(todis,"Update");
 				toRepaint(todis);
 				closeUpWindow();
 				return ;
@@ -144,7 +139,7 @@ public class CheckUpdate {
 			else {
 				System.out.println("No new updates " + "current version: "+ d +"; newest version: "+ c);
 				wl.writeLog("no new updates " + "current version: "+ d +"; newest version: "+ c);
-				popUp("No new updates");
+				popUp("No new updates","Update");
 				closeUpWindow();
 
 			}
@@ -173,7 +168,7 @@ public class CheckUpdate {
 					todis = "Error checking update: Timed out!";
 					System.out.println(todis);
 					wl.writeLog(todis);
-					popUp(todis);
+					popUp(todis, "Update");
 					toRepaint(todis);
 					closeUpWindow();
 					return;
@@ -182,13 +177,12 @@ public class CheckUpdate {
 			}
 
 		
-		MessageDigest shaDigest = MessageDigest.getInstance("SHA-1");
-	
+		MessageDigest shaDigest = MessageDigest.getInstance("SHA-256");
 			if(!getFileChecksum(shaDigest, in).equals(fromcom.toString())) {
 				todis = "mismatched hash at "+ in +"\n expected: "+fromcom+  "\n reality:" + getFileChecksum(shaDigest, in);
 				System.out.println(todis);
 				wl.writeLog(todis);
-				popUp(todis);
+				popUp(todis, "Update");
 			}
 			else {
 				todis = "hash matched "+ getFileChecksum(shaDigest, in);
@@ -198,8 +192,7 @@ public class CheckUpdate {
 
 
 	}
-	private String getFileChecksum(MessageDigest digest, InputStream fis) throws IOException
-	{
+	private String getFileChecksum(MessageDigest digest, InputStream fis) throws IOException{
 		byte[] byteArray = new byte[1024];
 		int bytesCount = 0;
 		while ((bytesCount = fis.read(byteArray)) != -1) {

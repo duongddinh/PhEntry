@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.Random;
 import javax.swing.Timer;
 import javax.swing.UIManager;
@@ -23,6 +24,7 @@ public class TheGame extends EssentialFunctions{
 	private boolean fly = false;
 	private static boolean check = true;
 	private boolean inmotion = false;
+	private int score =0;
 	public TheGame() {
 		animation = new ActionListener() {
 			@Override
@@ -72,10 +74,17 @@ public class TheGame extends EssentialFunctions{
 			x2 = randomBiomeDistance();
 			y2 = ranBiomL();
 			cc =false;
+		}	
+		if ( ! ( new File(System.getProperty("user.dir")+"/highscore.txt").exists())) {
+			WriteInfo("/highscore.txt", 0);
+		}else {
+			if(score >Integer.parseInt(getFistLine("/highscore.txt"))) {
+				WriteInfo("/highscore.txt", score);
 
+			}
 		}
-
-		if(((50 <= c +y && 50 >=c) || (50 <= (c+x2+y2) && c >=(c+x2) )) &&yjum == 370  ) 
+		
+		if(((50 <= c +y && 50 >=c) || (50 <= (c+x2+y2) && 50 >=(c+x2) )) &&yjum == 370  ) 
 			die();
 
 		if (fly) {
@@ -91,7 +100,6 @@ public class TheGame extends EssentialFunctions{
 
 					fly = false;
 					inmotion = false;
-
 				}
 			}
 		}
@@ -105,6 +113,7 @@ public class TheGame extends EssentialFunctions{
 		fly = false;
 		check = true;
 		inmotion = false;
+		score =0;
 	}
 
 	public void die() {
@@ -118,13 +127,14 @@ public class TheGame extends EssentialFunctions{
 		logic();
 		g.setColor(Color.CYAN);
 		g.fillRect(0, 400, 1000, 150);
-
 		g.setColor(UIManager.getColor( "Panel.background" ));
-
 		g.fillRect(c, 400, y, 150);
 		g.fillRect(c + x2, 400, y2, 150);
 		g.setColor(Color.RED);
 		g.fillOval( 50, yjum , 30, 30);
+		g.drawString("Score: "+ score++, 240, 100);
+		g.drawString("Hight Score: "+ getFistLine("/highscore.txt"), 400, 100);
+
 		if (isDone) {
 			Font currentFont = g.getFont();
 			Font newFont = currentFont.deriveFont(currentFont.getSize() * 2F);
