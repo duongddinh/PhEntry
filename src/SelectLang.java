@@ -49,23 +49,22 @@ public class SelectLang extends EssentialFunctions {
 		frameHide.add(panel);
 		frameHide.setVisible(true); 
 		ok.addActionListener(new ActionListener() { 
-
-			public void actionPerformed(ActionEvent e) 
-			{ 
+			public void actionPerformed(ActionEvent e) { 
 				if (english.isSelected()) { 
-					System.out.println("1");
+					WriteInfo("/lang.txt", false);
 				} 
 
 				else if (spanish.isSelected()) { 
-					System.out.println("2");
+					WriteInfo("/lang.txt", true);
+				}
+				frameHide.dispose();
+				popUp("Restart to enact changes","Restart");
 
-				} 
-				else { 
-					System.out.println("3");
-
-				} 
 			} 
 		}); 
 	}
+	
+	
+	
 
 }

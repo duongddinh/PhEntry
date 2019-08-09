@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -128,6 +129,17 @@ abstract class EssentialFunctions extends JPanel {
 		}
 		return re;
 		
+	}
+	
+	public void WriteInfo(String where, boolean trueorfalse) {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(System.getProperty("user.dir")+where);
+		} catch (FileNotFoundException e2) {
+			e2.printStackTrace();
+		}
+		writer.print(trueorfalse);
+		writer.close();
 	}
 	
 }

@@ -58,10 +58,16 @@ public class SuperGoodUI extends EssentialFunctions implements ActionListener{
 	private void periodicPop() {
 		if(!HidePopUpOPtion.hideRP)
 			if(Math.random() < 0.5) {
-				popUp("Remember to rate this app 5 stars on the store!!!","Improtant");
+				if( Boolean.parseBoolean(getFistLine("/lang.txt")))
+					popUp("Recuerda calificar esta aplicación con 5 estrellas en la tienda!!!","importante");
+				else
+					popUp("Remember to rate this app 5 stars on the store!!!","Improtant");
 			}
 			else {
-				popUp("We don't use cookies, so you need to accept by clicking ok!!","Important");
+				if( Boolean.parseBoolean(getFistLine("/lang.txt")))
+					popUp("Nosotros no usamos COOKIES, así que tienes que aceptar seleccionando OK","importante");
+				else
+					popUp("We don't use cookies, so you need to accept by clicking ok!!","Important");
 
 			}
 

@@ -7,9 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,25 +37,51 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 	TheGame ng = new TheGame();
 
 	public ControlPanel() {
-		allButton[0] = new JButton("Register because I don't have an account");
-		allButton[1] = new JButton("Read terms and conditions");
-		allButton[2] = new JButton("Close Terms Conditions");
-		allButton[3] = new JButton("help");
-		allButton[4] = new JButton("Close Help");
-		allButton[5] = new JButton("Privacy policy");
-		allButton[6] = new JButton("Close Privacy policy");
-		allButton[7] = new JButton("Log in because I already have an account as I created it");
-		allButton[8] = new JButton("Log out because I don't want to log in anymore");
-		allButton[9] = new JButton("Auto-Generate password");
-		allButton[10] = new JButton("Hide popUp");
-		allButton[11] = new JButton("Forget password");
-		allButton[12] = new JButton("For Advanced User");
-		allButton[13] = new JButton("Play game instead because I don't have internet connection.");
-		allButton[14] = new JButton("Quit Game");
-		allButton[15] = new JButton("Play Again");
-		allButton[16] = new JButton("Credit");
-		allButton[17] = new JButton("Change Language");
-		allButton[18] = new JButton("Feedback/Report bug");
+		if( Boolean.parseBoolean(getFistLine("/lang.txt"))) {
+			allButton[0] = new JButton("Register because I don't have an account");
+			allButton[1] = new JButton("Leer los términos y condiciones");
+			allButton[2] = new JButton("Close Terms Conditions");
+			allButton[3] = new JButton("Ayuda");
+			allButton[4] = new JButton("Close Help");
+			allButton[5] = new JButton("Política de privacidad");
+			allButton[6] = new JButton("Close Privacy policy");
+			allButton[7] = new JButton("Log in because I already have an account as I created it");
+			allButton[8] = new JButton("Cerrar sesión porque no quiero iniciar sesión nunca más");
+			allButton[9] = new JButton("Autogenerar contraseña");
+			allButton[10] = new JButton("Esconder popUp");
+			allButton[11] = new JButton("Olvido de contraseña");
+			allButton[12] = new JButton("Para usuarios avanzados");
+			allButton[13] = new JButton("Juega en el lugar porque no tenemos conexión a internet.");
+			allButton[14] = new JButton("Salir del juego");
+			allButton[15] = new JButton("Jugar de nuevo");
+			allButton[16] = new JButton("Crédito");
+			allButton[17] = new JButton("Cambiar idioma");
+			allButton[18] = new JButton("Feedback/Report bug");
+			username = new JTextField("Escriba el nombre por favor", 30);
+			psswd = new JPasswordField("Escribir la contraseña", 30);
+		} else {
+			allButton[0] = new JButton("Register because I don't have an account");
+			allButton[1] = new JButton("Read terms and conditions");
+			allButton[2] = new JButton("Close Terms Conditions");
+			allButton[3] = new JButton("help");
+			allButton[4] = new JButton("Close Help");
+			allButton[5] = new JButton("Privacy policy");
+			allButton[6] = new JButton("Close Privacy policy");
+			allButton[7] = new JButton("Log in because I already have an account as I created it");
+			allButton[8] = new JButton("Log out because I don't want to log in anymore");
+			allButton[9] = new JButton("Auto-Generate password");
+			allButton[10] = new JButton("Hide popUp");
+			allButton[11] = new JButton("Forget password");
+			allButton[12] = new JButton("For Advanced User");
+			allButton[13] = new JButton("Play game instead because I don't have internet connection.");
+			allButton[14] = new JButton("Quit Game");
+			allButton[15] = new JButton("Play Again");
+			allButton[16] = new JButton("Credit");
+			allButton[17] = new JButton("Change Language");
+			allButton[18] = new JButton("Feedback/Report bug");
+			username = new JTextField("Type in the name please", 30);
+			psswd = new JPasswordField("Type in the password", 30);
+		}
 
 		for(int i=0; i< allButton.length; allButton[i++].addActionListener(this));
 		for(int i=0; i< allButton.length; allButton[i++].setOpaque(true));
@@ -65,9 +89,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		keepLogged.setOpaque(true);
 		playsound.setOpaque(true);
 		darkmode.setOpaque(true);
-		username = new JTextField("Type in the name please", 30);
-		username.grabFocus();
-		psswd = new JPasswordField("Type in the password", 30);
+
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
@@ -83,7 +105,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		playsound.addActionListener(this);
 		darkmode.addActionListener(this);
 
-		this.setPreferredSize(new Dimension(50,240));
+		this.setPreferredSize(new Dimension(50,280));
 		this.setBackground(new Color(0, 0, 139));  
 		this.add(username);
 		this.add(psswd);
@@ -100,10 +122,10 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		allButton[8].setVisible(false);
 		allButton[14].setVisible(false);
 		allButton[15].setVisible(false);
-	     if (oneplz ==0) {
-	        	oneplz = 1;
-	        	frame.add(ms);
-	        }
+		if (oneplz ==0) {
+			oneplz = 1;
+			frame.add(ms);
+		}
 		UserCredent.keepLogged();
 		initialCD = Boolean.parseBoolean(isNightMode);
 		darkmode.setSelected(Boolean.parseBoolean(isNightMode));
@@ -142,8 +164,13 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				return true;
 			}
 		}
-		if(!HidePopUpOPtion.hideNRP)
-			popUp("Atleast a number is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP) {
+			if( Boolean.parseBoolean(getFistLine("/lang.txt")))
+				popUp("Al menos se requiere un numero","La contraseña no es segura");
+
+			else
+				popUp("Atleast a number is required","password is not secured");
+		}
 
 		return false;
 	}
@@ -155,9 +182,14 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				return true;
 			}
 		}
-		if(!HidePopUpOPtion.hideNRP)
-			popUp("Atleast a special charater is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP) {
+			if( Boolean.parseBoolean(getFistLine("/lang.txt")))
+				popUp("Al menos se requiere un carácter especial","La contraseña no es segura");
 
+			else
+
+				popUp("Atleast a special charater is required","password is not secured");
+		}
 		return false;
 
 	}
@@ -169,9 +201,17 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				return true;
 			}
 		}
-		if(!HidePopUpOPtion.hideNRP)
-			popUp("Atleast a lower case charater is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP) {
+			if( Boolean.parseBoolean(getFistLine("/lang.txt")))
 
+				popUp("Al menos se requiere una minúscula","La contraseña no es segura");
+
+			else
+
+				popUp("Atleast a lower case charater is required","password is not secured");
+
+
+		}
 		return false;
 
 	}
@@ -183,9 +223,14 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				return true;
 			}
 		}
-		if(!HidePopUpOPtion.hideNRP)
-			popUp("Atleast a upper case charater is required","password is not secured");
+		if(!HidePopUpOPtion.hideNRP) {
+			if( Boolean.parseBoolean(getFistLine("/lang.txt")))
+				popUp("Al menos se requiere una mayúscula","La contraseña no es segura");
 
+			else
+
+				popUp("Atleast a upper case charater is required","password is not secured");
+		}
 		return false;
 	}
 
@@ -208,16 +253,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		frame.remove(ms);
 	}
 
-	public void WriteInfo(String where, boolean trueorfalse) {
-		PrintWriter writer = null;
-		try {
-			writer = new PrintWriter(System.getProperty("user.dir")+where);
-		} catch (FileNotFoundException e2) {
-			e2.printStackTrace();
-		}
-		writer.print(trueorfalse);
-		writer.close();
-	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -264,11 +300,16 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			psswd.setEchoChar('*');
 		} else {
 			if (!HidePopUpOPtion.hideNSPP) {
-				popUp("Showing password may potentially get your password stolen\ncheck the option if you don't want to take a risk!","Warning");
+				if( Boolean.parseBoolean(getFistLine("/lang.txt")))
+					popUp("Mostrar la contraseña puede causar que te roben la contraseña\nRevisa las opciones si tu no quieres correr un riesgo","La contraseña no es segura");
+
+				else
+
+					popUp("Showing password may potentially get your password stolen\ncheck the option if you don't want to take a risk!","Warning");
 			}
 			psswd.setEchoChar((char) 0);
 		}
-		if (s.equals("Register because I don't have an account") ) {
+		if (e.getSource() == allButton[0] ) {
 
 			if (confirm("Are you not want to register?\nyou will have to remember your password and username\nfurthermore, it will cost you few bytes storage!") == 0) {
 				if (havereadh && havereadp && havereadt) {
@@ -299,7 +340,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			}
 		}
 
-		if(s.equals("Feedback/Report bug")) {
+		if(e.getSource() == allButton[18]) {
 			Desktop desktop = Desktop.getDesktop();
 			String message = "mailto:bob@null0verflow.xyz?subject=feedback";
 			URI uri = URI.create(message);
@@ -310,8 +351,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				wl.writeLog(e1.toString());
 			}
 		}
-		
-		if(s.equals("Play Again")) {
+
+		if(e.getSource() == allButton[15]) {
 			allButton[15].setVisible(false);
 			ng.isDone = false;
 			ng.reset();
@@ -320,7 +361,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			frame.repaint();
 		}
 
-		if(s.equals("Quit Game")) {
+		if(e.getSource() == allButton[14]) {
 			allButton[0].setVisible(true);
 			allButton[1].setVisible(true);
 			allButton[3].setVisible(true);
@@ -340,7 +381,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			frame.add(ms);
 
 		}
-		if(s.equals("Play game instead because I don't have internet connection.")) {
+		if(e.getSource() == allButton[13]) {
 			for(int i=0; i< allButton.length; allButton[i++].setVisible(false));
 			allButton[14].setVisible(true);
 			allButton[10].setVisible(true);
@@ -377,35 +418,35 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 
 
 
-		if(s.equals("Credit")) {
+		if(e.getSource() == allButton[16]) {
 			new Credit();
 		}
 
-		if(s.equals("Change Language")) {
+		if(e.getSource() == allButton[17]) {
 			new SelectLang();
 		}
-		if(s.equals("For Advanced User")) {
+		if(e.getSource() == allButton[12]) {
 
 			new ForAdvancedUser();
 
 		}
 
-		if(s.equals("Auto-Generate password")) {
+		if(e.getSource() == allButton[9]) {
 
 			new AutoGenQuestion();
 		}
 
-		if(s.equals("Hide popUp")) {
+		if(e.getSource() == allButton[10]) {
 
 			new HidePopUpOPtion();
 		}
 
-		if(s.equals("Forget password")) {
+		if(e.getSource() == allButton[11]) {
 			if(confirm("There is nothing we can do to restore your password since it is stored at your local device\nYou should register a new account\nDo you want to Brutefore to find your password?\nRead help at the main screen to learn more about bruteforcing")==0)
 				BruteForce.doingit();
 		}
 
-		if(s.equals("Read terms and conditions")&&!isReadingHelp) {
+		if(e.getSource() == allButton[1]&&!isReadingHelp) {
 			if (!isReadingPrvacy) {
 				frame.remove(ms);
 				isReadingTerms  = true;
@@ -417,7 +458,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				if(!HidePopUpOPtion.hideNRP)
 					popUp("dude, keep reading.", "Keep reading");}
 		}
-		if(s.equals("help")) {
+		if(e.getSource() == allButton[3]) {
 			isReadingHelp = true;
 			if (!isReadingPrvacy &&!isReadingTerms) {
 				frame.remove(ms);
@@ -429,7 +470,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				if(!HidePopUpOPtion.hideNRP)
 					popUp("You haven't done reading yet!", "Keep reading");}
 		}
-		if(s.equals("Close Help")) {
+		if(e.getSource() == allButton[4]) {
 			frame.add(ms);
 			havereadh = true;
 			isReadingHelp = false;
@@ -444,7 +485,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 				loggedIN();
 			}
 		}
-		if (s.equals("Privacy policy") && !isReadingHelp) {
+		if (e.getSource() == allButton[5]&& !isReadingHelp) {
 
 			if (!isReadingTerms) {
 				isReadingPrvacy = true;
@@ -458,7 +499,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 					popUp("dude, keep reading", "Keep reading");}
 
 		}
-		if (s.equals("Close Privacy policy")) {
+		if (e.getSource() == allButton[6]) {
 
 			havereadp = true;
 			isReadingPrvacy = false;
@@ -477,7 +518,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 
 		}
 
-		if (s.equals("Log out because I don't want to log in anymore")) {
+		if (e.getSource() == allButton[8]) {
 			allButton[0].setVisible(true);
 			allButton[7].setVisible(true);
 			allButton[8].setVisible(false);
@@ -494,7 +535,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			bb.remove();
 			frame.add(ms);
 		}
-		if(s.equals("Close Terms Conditions")) {
+		if(e.getSource() == allButton[2]) {
 			isReadingTerms  = false;
 			havereadt = true;
 			long tEnd = System.currentTimeMillis();
