@@ -1,0 +1,167 @@
+<head>
+    <title>Help</title>
+<link href="image/Logo.png" rel="shortcut icon" type="favicon"/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"
+/>
+</head>
+<body>
+<style>
+body {
+    font: normal 15px Verdana, Arial, sans-serif;
+}
+
+</style>
+<h1>_____</h1>
+<h1>Welcome to NiceUI project's Wiki!</h1>
+<div>
+    <p>Table of contents:</p>
+  | <a href="#Important">Important</a>
+  | <a href="#changesource">Change Sources</a>
+  | <a href="#forgetpass">Forget password-bruteforcing method</a>
+  | <a href="#hidePopUP">Hide PopUp</a>
+  | <a href="#ChangingGame">Change Game</a> |
+  | <a href="#Credit">Thanks to</a> |
+
+</div>
+
+<section id = "Important">
+<h2>Important</h2>
+<p>
+    You cannot change language in this Wiki page. So your language in your program might be different
+</p>
+<p>
+    The terms and conditions is here just to over-engineer the program, <br>but it is important to understand
+    that the program will generate about 9-10 txt files in its current directory to store data. <br>The login here is just for fun to browse r/programmerhumor reddit; <br>please don't use your actual reddit username and password. <br>The password will NOT be sent to the server, it is stored locally.<br>
+    
+    That is it! you can ignore the rest of the terms and conditions.
+    
+</p>
+
+<p>
+    Privacy Policy is here just for fun,<br> but you need to understand that the program will NOT sent anything to the server. <br>As such, I do NOT collect any information.<br> That is it, you can ignore the rest of the Privacy Policy.
+</p>
+
+<p>Keep in mind that Darkmode is NOT applied everywhere. <br>In addition, Spanish-language is not 100% translated because there are some words that are better left as it.</p>
+
+</section>
+
+<section id = "changesource">
+
+<h2>Change Sources</h2>
+<p><font  color="red"><b>There is only ONE trusted source, which is my github source.<br>Be careful when adding sources.</b></font></p>
+
+<p>Changing source allows modified version to be checked and downloaded without hash mis-matched error. <br> The source you add might push update or fix bugs faster than the original.</p>
+
+</section>
+
+
+
+<section id = "forgetpass">
+    
+<h2>Forget password-bruteforcing method</h2>
+<p>To use this, you need a list of possible passwords that you might use for your login. <br>Write all possible passwords and store it in a txt file. <br>Then select the txt files for the program to start checking.</p>
+
+<p>Uses SHA265 algorithm</p>
+
+<pre><code class="language-clike">
+    	public static String getHash(String pssd) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			wl.writeLog(e.toString());
+
+		}
+		byte[] digest = md.digest(pssd.getBytes(StandardCharsets.UTF_8));<br>
+		return DatatypeConverter.printHexBinary(digest).toLowerCase();<br>
+	}
+
+</code></pre>
+<p>Note: bruteforcing in some cases are illegal to perform.<br> Since this program demonstrates over-engineering theme, I added this with no malicious intend.</p>
+
+</section>
+
+
+<section id = "hidePopUP">
+<h2>Hide PopUp</h2>
+<p>Hide all will disable method call for EssentialFunctions.popUp(str, str). <br>Otherwise, method call EssentialFunctions.PopUp(str,str) will be called depends on var bool.<br>You won't be able to hide start-up popUp because they are important.</p>
+
+<p><i>Hide recommeded popUp:</i> hide what we think we should hide<br><i>Hide "Not show password" recommendation popUp: </i>Hide annoying popUp when you did not choose "Not show password"<br> (Showing password may potentially get your password stolen\ncheck the option if you don't want to take a risk!)<br><i>Hide not recommended popUp:</i> Basically an inverse version of "Hide recommeded popUp."</p>
+<pre><code class = "language-clike">
+    	protected static void popUp(String todis, String title) {
+		if (!HidePopUpOPtion.hideAllP) {
+			JOptionPane.showMessageDialog((Component) null, todis,
+					title, JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+</code></pre>
+
+</section>
+
+<section id = "ChangingGame">
+<h2>Change Game</h2>
+<p>OWO, You can change the game!</p>
+<p><b>Requirements:</b></p>
+<p>You need to know Java<br>Download <a href="">ChangeGame.jar</a><br>Create theGame.java and start coding your game!</p>
+<p>theGame's template</p>
+<pre><code class ="language-clike">
+    import javax.swing.Timer;
+    import javax.swing.UIManager;
+    import java.awt.Color;
+    import java.awt.Graphics;
+    import java.awt.event.ActionEvent;
+    import java.awt.event.ActionListener;
+    import java.awt.event.KeyEvent;
+public class TheGame extends EssentialFunctions {
+    ....
+    public static Timer timer;
+	private ActionListener animation;
+	
+    ...
+    	public TheGame() {
+		animation = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				repaint();
+			}
+		};
+		timer = new Timer(50, animation);
+	}
+	...
+	public void reset() {
+        //reset the game when user click play again
+	}
+	
+	...
+	
+	public void paint(Graphics g){
+       ... 
+           //to use dark-mode / night mode
+			g.setColor(UIManager.getColor( "Panel.background" ));
+       ...
+	}
+	}
+
+</code></pre>
+
+<p><b>Dependencies: </b> <a href="">EssentialFunctions.java</a>, <a href ="">WriteLogF.java</a>, <a href = "">MainScreen</a></p>
+
+<p>Then, just follow the instructions in the ChangeGame.jar</p>
+<p>Next steps are essentially knowing java commands: <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">Javac</a> and <a href="https://docs.oracle.com/javase/tutorial/deployment/jar/update.html">jar uf</a>, leave as it if you don't understand.</p>
+</section>
+
+<section id = "Credit">
+<h2>Thanks to</h2>
+<p>My good friend, Benjamin Barros, for translating to Spanish. This could not be done without you <3 </p>
+
+</section>
+<h1>_____</h1>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+
+</body>

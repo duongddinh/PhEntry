@@ -36,7 +36,7 @@ public class SelectLang extends EssentialFunctions {
  
 
 		frameHide.setResizable(false);
-		frameHide.setSize(150, 200); 
+		frameHide.setSize(200, 100); 
 		frameHide.setFocusable(true); 
 		frameHide.setLocationRelativeTo(null);
 		frameHide.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);

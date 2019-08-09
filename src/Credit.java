@@ -10,18 +10,17 @@ import javax.swing.WindowConstants;
 public class Credit extends EssentialFunctions {
 	private static final long serialVersionUID = 1L;
 	JFrame frameHide = new JFrame();
-	JLabel instruc1[] = new JLabel[4];
+	JLabel instruc1[] = new JLabel[2];
 	public Credit() {
 		frameHide = new JFrame("Credit"); 
-		instruc1[0] = new JLabel("Developer: Bob");
-		instruc1[1] = new JLabel("Translate to German: ");
-		instruc1[2] = new JLabel("Translate to Spanish: ");
-		instruc1[3] = new JLabel("Translate to Italian: ");
+		instruc1[0] = new JLabel("Develper: Bob");
+
+		instruc1[1] = new JLabel("Translate to Spanish: Benjamin Barros");
 
 		JPanel panel = new JPanel();
 		for(int i=0; i< instruc1.length; panel.add(instruc1[i++]));
 		frameHide.setResizable(false);
-		frameHide.setSize(200, 200); 
+		frameHide.setSize(300, 100); 
 		frameHide.setFocusable(true); 
 		frameHide.setLocationRelativeTo(null);
 		frameHide.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
