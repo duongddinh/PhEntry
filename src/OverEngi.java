@@ -26,7 +26,7 @@ public class OverEngi extends EssentialFunctions {
 			UIManager.put("Panel.background", Color.DARK_GRAY);
 			UIManager.put("OptionPane.messageForeground", Color.WHITE);
 		}
-        /*
+       
 		CheckUpdate ccu= new CheckUpdate();
 		try {
 			ccu.checkup();
@@ -39,7 +39,7 @@ public class OverEngi extends EssentialFunctions {
 		popUp("This is likely a parody", "disclaimer");
 		popUp("Privacy Policy and terms of conditions are fake, \njust to make fun of things, shouldn't take things seriously", "Disclaimer");
 		popUp("This is a hello world login program in the 33rd century", "Welcome");
-        */
+       
 		new SuperGoodUI();
 	}
 
