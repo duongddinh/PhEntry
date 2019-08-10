@@ -33,8 +33,8 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 	public static boolean nightmode = false;
 	private boolean soundfx = false;
 	private boolean initialCD = false;
-	BrowseLoggedIn bb = new BrowseLoggedIn();
-	TheGame ng = new TheGame();
+	private BrowseLoggedIn bb = new BrowseLoggedIn();
+	private TheGame ng = new TheGame();
 
 	public ControlPanel() {
 		if( Boolean.parseBoolean(getFistLine("/lang.txt"))) {
@@ -105,16 +105,95 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		playsound.addActionListener(this);
 		darkmode.addActionListener(this);
 
-		this.setPreferredSize(new Dimension(50,280));
-		this.setBackground(new Color(0, 0, 139));  
+		
+		//this.setLayout(null);
+		/*
+		username.setBounds(20, 10, 200, 30);
+		psswd.setBounds(220, 10, 200, 30);
+        keepLogged.setBounds(420, 12, 150, 25);
+		cb.setBounds(580, 12, 180, 25);
+*/
 		this.add(username);
 		this.add(psswd);
+        this.add(keepLogged);
 		this.add(cb);
-		this.add(keepLogged);
+/*		
+		allButton[15].setBounds(20, 70, 300, 30);
+		allButton[14].setBounds(350, 70, 300, 30);
+*/
+		this.add(allButton[15]);
+		this.add(allButton[14]);
+		
+		//aboutPassord.setBounds(100, 40, 600, 25);
 		this.add(aboutPassord);
-		for(int i=0; i<allButton.length; this.add(allButton[i++]));
+
+		//allButton[0].setBounds(20, 70, 300, 30);
+		this.add(allButton[0]);
+
+		/*
+		allButton[7].setBounds(350, 70, 400, 30);
+		allButton[8].setBounds(350, 70, 400, 30);
+*/
+		this.add(allButton[7]);
+		this.add(allButton[8]);
+		
+		//allButton[9].setBounds(20, 110, 200, 30);
+		this.add(allButton[9]);
+		
+		//allButton[3].setBounds(230, 110, 90, 30);
+		//allButton[4].setBounds(230, 110, 90, 30);
+
+		this.add(allButton[3]);
+		this.add(allButton[4]);
+
+		//allButton[11].setBounds(350, 110, 200, 30);
+		//allButton[10].setBounds(560, 110, 190, 30);
+		//allButton[13].setBounds(190, 150, 400, 30);
+		
+		this.add(allButton[11]);
+		this.add(allButton[10]);
+		this.add(allButton[13]);
+		
+		//allButton[1].setBounds(20, 190, 200, 30);
+		//allButton[2].setBounds(20, 190, 200, 30);
+
+		this.add(allButton[1]);
+		this.add(allButton[2]);
+
+		
+		//allButton[5].setBounds(230, 190, 150, 30);
+		//allButton[6].setBounds(230, 190, 150, 30);
+
+		this.add(allButton[5]);
+		this.add(allButton[6]);
+
+		
+		//allButton[17].setBounds(390, 190, 150, 30);
+		//allButton[18].setBounds(550, 190, 200, 30);
+        
+		this.add(allButton[17]);
+		this.add(allButton[18]);
+		
 		this.add(playsound);
 		this.add(darkmode);
+
+		//playsound.setBounds(200, 230, 100, 30);
+        //darkmode.setBounds(320, 230, 120, 30);
+		//allButton[16].setBounds(460, 230, 100, 30);
+		this.add(allButton[16]);
+
+		
+		
+		this.setPreferredSize(new Dimension(50,280));
+		this.setBackground(new Color(0, 0, 139));  
+	//	this.add(username);
+	//	this.add(psswd);
+	//	this.add(cb);
+	//	this.add(keepLogged);
+	//	this.add(aboutPassord);
+		//for(int i=0; i<allButton.length; this.add(allButton[i++]));
+	//	this.add(playsound);
+	//	this.add(darkmode);
 
 		allButton[2].setVisible(false);
 		allButton[4].setVisible(false);
@@ -385,9 +464,13 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			for(int i=0; i< allButton.length; allButton[i++].setVisible(false));
 			allButton[14].setVisible(true);
 			allButton[10].setVisible(true);
+			allButton[16].setVisible(true);
+			allButton[17].setVisible(true);
+			allButton[18].setVisible(true);
 			aboutPassord.setVisible(false);
 			ng.isDone = false;
 			ng.reset();
+
 			frame.remove(ms);
 			frame.getContentPane().add(BorderLayout.CENTER, ng); 	
 			frame.setLocationRelativeTo(null);

@@ -37,7 +37,7 @@ public class Help extends EssentialFunctions {
 				Worker<Void> worker = webEngine.getLoadWorker();
 				ObservableList<Node> children = root.getChildren();
 				progressBar.progressProperty().bind(worker.progressProperty());
-				progressBar.setPrefSize(800, 10);
+				progressBar.setPrefSize(770, 10);
 				children.addAll(browser,progressBar);                     
 				jfxPanel.setScene(scene);  
 			}  
