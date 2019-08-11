@@ -40,6 +40,15 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 		}
 		ok = new JButton("Ok");
 		changeGame = new JButton("Change game");
+
+		if ( Boolean.parseBoolean(EssentialFunctions.getFistLine("/lang.txt"))) {
+			instruc.setText("Comprobando la fuente de actualización");
+			instruc2.setText("Comprobando hash para la fuente TheGame.class");
+			instruc4.setText("Descargando la fuente Updater");
+			instruc5.setText("Se cuidadoso con las fuentes no confiables; la única fuente confiable (hasta ahora) es mi github");
+			changeGame.setText("Cambiar juego");
+		} 
+
 		instruc5.setForeground(Color.RED);
 		panel.add(instruc);
 		panel.add(question1);
@@ -80,18 +89,18 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 		writer.print(namesource);
 		writer.close();
 	}
-	
-	
+
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand(); 
-        if(s.equals("ok")) {
-        	newSource(question1.getText(), "/updateSource.txt");
-        	newSource(question2.getText(), "/TheGame.txt");
-        	newSource(question4.getText(), "/UpdaterSource.txt");
-        }
-        if (s.equals("Change game")) {
-    		if (Desktop.isDesktopSupported()) {
+		if(s.equals("ok")) {
+			newSource(question1.getText(), "/updateSource.txt");
+			newSource(question2.getText(), "/TheGame.txt");
+			newSource(question4.getText(), "/UpdaterSource.txt");
+		}
+		if (s.equals("Change game") || s.equals("Cambiar juego")) {
+			if (Desktop.isDesktopSupported()) {
 				Desktop desktop = Desktop.getDesktop();
 				try {
 					URI uri = new URI("https://null0verflow.xyz/hackathon/docs/index.html");
@@ -100,7 +109,7 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 					ex.printStackTrace();
 				}
 			}
-        }
-		
+		}
+
 	}
 }

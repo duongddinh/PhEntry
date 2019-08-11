@@ -59,6 +59,10 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			allButton[18] = new JButton("Feedback/Report bug");
 			username = new JTextField("Escriba el nombre por favor", 30);
 			psswd = new JPasswordField("Escribir la contraseña", 30);
+			aboutPassord.setText("La contraseña debe contener más de 8 caracteres, letras mayúsculas y números");
+			cb.setText("No mostrar la contraseña");
+			playsound.setText("Reproducir sonido");
+			darkmode.setText("Modo oscuro ");
 		} else {
 			allButton[0] = new JButton("Register because I don't have an account");
 			allButton[1] = new JButton("Read terms and conditions");
@@ -172,6 +176,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 		//allButton[18].setBounds(550, 190, 200, 30);
         
 		this.add(allButton[17]);
+		this.add(allButton[12]);
 		this.add(allButton[18]);
 		
 		this.add(playsound);

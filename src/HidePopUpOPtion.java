@@ -15,12 +15,21 @@ public class HidePopUpOPtion extends EssentialFunctions implements ActionListene
 	JFrame frameHide = new JFrame();
 	JLabel instruc1[] = new JLabel[4];
 	public HidePopUpOPtion() {
+		
+		if ( Boolean.parseBoolean(getFistLine("/lang.txt"))){
+			frameHide = new JFrame("Esconder popUp"); 
+			allbocs[0] = new JCheckBox("Ocultar TODAS popUp");
+			allbocs[1] = new JCheckBox("Ocultar recomendados popUp");
+			allbocs[2] = new JCheckBox("Ocultar recomendación \"No mostrar la contraseña\" popUp");
+			allbocs[3] = new JCheckBox("Ocultar no recomendados popUp");
+		} else {
+		
 		frameHide = new JFrame("Hide pop Up options"); 
 		allbocs[0] = new JCheckBox("Hide ALL popUp");
 		allbocs[1] = new JCheckBox("Hide recommeded popUp");
 		allbocs[2] = new JCheckBox("Hide \"Not show password\" recommendation popUp");
 		allbocs[3] = new JCheckBox("Hide not recommended popUp");
-
+		}
 		allbocs[0] .setSelected(hideAllP);
 		allbocs[1] .setSelected(hideRP);
 		allbocs[2] .setSelected(hideNSPP);
