@@ -150,17 +150,20 @@ public class CheckUpdate extends EssentialFunctions{
 
 	private void checkhash() throws NoSuchAlgorithmException, IOException {
 		
-		InputStream in;
-		in=getClass().getResourceAsStream("TheGame.class");
+		InputStream in[] = new InputStream[2];
+		in[0]=getClass().getResourceAsStream("TheGame.class");
+		in[1]=getClass().getResourceAsStream("MainScreen.class");
 
 		BufferedReader br = null;
-		StringBuilder fromcom;
-	    fromcom = new StringBuilder();
-		URL url;
-
-		url= new URL(EssentialFunctions.getSuperGoodUIS());
+		StringBuilder fromcom[] = new StringBuilder[2];
+	    for(int i=0; i<fromcom.length;fromcom[i++] = new StringBuilder());
+		URL url[] = new URL[2];
+		
+		url[0]= new URL(EssentialFunctions.getSuperGoodUIS());
+		url[1]= new URL(EssentialFunctions.getMainScreen());
+		for (int i =0; i< url.length; i++) {
 			long tStart = System.currentTimeMillis();
-			br = new BufferedReader(new InputStreamReader(url.openStream()));
+			br = new BufferedReader(new InputStreamReader(url[i].openStream()));
 			String line;
 			while ((line = br.readLine()) != null) {	
 				long tEnd = System.currentTimeMillis();
@@ -168,27 +171,31 @@ public class CheckUpdate extends EssentialFunctions{
 					todis = "Error checking update: Timed out!";
 					System.out.println(todis);
 					wl.writeLog(todis);
-					popUp(todis, "Update");
+					popUp(todis, "Error");
 					toRepaint(todis);
 					closeUpWindow();
 					return;
 				}
-				fromcom.append(line);
+				fromcom[i].append(line);
 			}
+
+		}
 
 		
 		MessageDigest shaDigest = MessageDigest.getInstance("SHA-256");
-			if(!getFileChecksum(shaDigest, in).equals(fromcom.toString())) {
-				todis = "mismatched hash at "+ in +"\n expected: "+fromcom+  "\n reality:" + getFileChecksum(shaDigest, in);
+		for (int i=0; i< in.length; i++) {
+			if(!getFileChecksum(shaDigest, in[i]).equals(fromcom[i].toString())) {
+				todis = "mismatched hash at "+ in[i] +"\n expected: "+fromcom[i]+  "\n reality:" + getFileChecksum(shaDigest, in[i]);
 				System.out.println(todis);
 				wl.writeLog(todis);
-				popUp(todis, "Update");
+				popUp(todis, "Error");
 			}
 			else {
-				todis = "hash matched "+ getFileChecksum(shaDigest, in);
+				todis = "hash matched "+ getFileChecksum(shaDigest, in[i]);
 				System.out.println(todis);
 				wl.writeLog(todis);
 			}
+		}
 
 
 	}

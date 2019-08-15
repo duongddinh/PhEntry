@@ -117,7 +117,17 @@ abstract class EssentialFunctions extends JPanel {
 			return "https://null0verflow.xyz/hackathon/sources/TheGame.txt";
 		}
 		return re;
-
+	}
+	protected static String getMainScreen() {
+		String re;
+		try {
+		re= getFistLine("/MainScreen.txt");
+		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
+			return "https://null0verflow.xyz/hackathon/sources/MainScreen.txt";
+		} catch (Exception e) {
+			return "https://null0verflow.xyz/hackathon/sources/MainScreen.txt";
+		}
+		return re;
 	}
 	protected static String getUpDaterSource() {
 		String re;

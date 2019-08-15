@@ -23,10 +23,12 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 	JPanel panel= new JPanel();;
 	JButton ok;
 	JTextField question1 = new JTextField(EssentialFunctions.getUpDateSource(),21);
+	JTextField question0 = new JTextField(EssentialFunctions.getMainScreen(),21);
 	JTextField question2 = new JTextField(EssentialFunctions.getSuperGoodUIS(), 21);
 	JTextField question4 = new JTextField(EssentialFunctions.getUpDaterSource(), 21);
 	JButton changeGame;
 	JLabel instruc = new JLabel("Checking update source:");
+	JLabel instruc1 = new JLabel("Checking Hash for MainScreen.class source");
 	JLabel instruc2 = new JLabel("Checking Hash for TheGame.class source");
 	JLabel instruc4 = new JLabel("Downloading Updater Source");
 	JLabel instruc5 = new JLabel("Be careful of untrusted sources; the only trusted source (til now) is my github");
@@ -43,6 +45,7 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 
 		if ( Boolean.parseBoolean(EssentialFunctions.getFistLine("/lang.txt"))) {
 			instruc.setText("Comprobando la fuente de actualización");
+			instruc1.setText("Comprobando hash para la fuente MainScreen.class");
 			instruc2.setText("Comprobando hash para la fuente TheGame.class");
 			instruc4.setText("Descargando la fuente Updater");
 			instruc5.setText("Se cuidadoso con las fuentes no confiables; la única fuente confiable (hasta ahora) es mi github");
@@ -52,6 +55,8 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 		instruc5.setForeground(Color.RED);
 		panel.add(instruc);
 		panel.add(question1);
+		panel.add(instruc1);
+		panel.add(question0);
 		panel.add(instruc2);
 		panel.add(question2);
 		panel.add(instruc4);
@@ -96,6 +101,7 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 		String s = e.getActionCommand(); 
 		if(s.equals("ok")) {
 			newSource(question1.getText(), "/updateSource.txt");
+			newSource(question0.getText(), "/MainScreen.txt");
 			newSource(question2.getText(), "/TheGame.txt");
 			newSource(question4.getText(), "/UpdaterSource.txt");
 		}

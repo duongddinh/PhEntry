@@ -38,14 +38,14 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 
 	public ControlPanel() {
 		if( Boolean.parseBoolean(getFistLine("/lang.txt"))) {
-			allButton[0] = new JButton("Register because I don't have an account");
+			allButton[0] = new JButton("Registrar porque no tengo una cuenta");
 			allButton[1] = new JButton("Leer los términos y condiciones");
-			allButton[2] = new JButton("Close Terms Conditions");
+			allButton[2] = new JButton("Cerrar los términos y condiciones");
 			allButton[3] = new JButton("Ayuda");
-			allButton[4] = new JButton("Close Help");
+			allButton[4] = new JButton("Cerrar Ayuda");
 			allButton[5] = new JButton("Política de privacidad");
-			allButton[6] = new JButton("Close Privacy policy");
-			allButton[7] = new JButton("Log in because I already have an account as I created it");
+			allButton[6] = new JButton("Cerrar Política de privacidad");
+			allButton[7] = new JButton("Iniciar sesión porque tengo una cuenta");
 			allButton[8] = new JButton("Cerrar sesión porque no quiero iniciar sesión nunca más");
 			allButton[9] = new JButton("Autogenerar contraseña");
 			allButton[10] = new JButton("Esconder popUp");
@@ -56,13 +56,15 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			allButton[15] = new JButton("Jugar de nuevo");
 			allButton[16] = new JButton("Crédito");
 			allButton[17] = new JButton("Cambiar idioma");
-			allButton[18] = new JButton("Feedback/Report bug");
+			allButton[18] = new JButton("Realimentación/Reportar un error");
 			username = new JTextField("Escriba el nombre por favor", 30);
 			psswd = new JPasswordField("Escribir la contraseña", 30);
 			aboutPassord.setText("La contraseña debe contener más de 8 caracteres, letras mayúsculas y números");
 			cb.setText("No mostrar la contraseña");
 			playsound.setText("Reproducir sonido");
 			darkmode.setText("Modo oscuro ");
+			privacyP.setText("No acepto los términos y condiciones y Política de privacidad");
+			keepLogged.setText("Mantenerme conectado");
 		} else {
 			allButton[0] = new JButton("Register because I don't have an account");
 			allButton[1] = new JButton("Read terms and conditions");

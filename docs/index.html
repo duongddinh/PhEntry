@@ -23,7 +23,7 @@ body {
     | <a href="#autoG">Auto-Generated password</a>
   | <a href="#forgetpass">Forget password-bruteforcing method</a>
   | <a href="#hidePopUP">Hide PopUp</a>
-  | <a href="#ChangingGame">Change Game</a> 
+  | <a href="#ChangingGame">Change Game/MainScreen</a> 
   | <a href="#alogin">About Loging in</a> 
   | <a href="#Building">Building the project</a> 
   | <a href="#license">LICENSE</a> 
@@ -52,7 +52,7 @@ body {
     Privacy Policy is here just for fun,<br> but you need to understand that the program will NOT sent anything to the server. <br>As such, I do NOT collect any information.<br> That is it, you can ignore the rest of the Privacy Policy.
 </p>
 
-<p>Keep in mind that Darkmode is NOT applied everywhere. <br>In addition, Spanish-language is not 100% translated because there are some words that are better left as it.</p>
+<p>Keep in mind that Darkmode is NOT applied everywhere. <br>In addition, Spanish-language is not 100% translated because there are some words that are better left as it and some places I can't put traslation on.</p>
 
 </section>
 
@@ -67,7 +67,7 @@ body {
   <li><a href="#hidePopUP">Hide PopUp</a></li>
   <li><a href="#forgetpass">Forget password</a></li>
   <li><a href="#changesource">Change Sources</a></li>
-  <li> <a href="#ChangingGame">Change Game</a> </li>
+  <li> <a href="#ChangingGame">Change Game/MainScreen</a> </li>
   <li>Built in game</li>
   <li>Change Language</li>
   <li>Built in feedback/bug report</li>
@@ -188,6 +188,34 @@ public class TheGame extends EssentialFunctions {
 
 <p>Then, just follow the instructions in the ChangeGame.jar</p>
 <p>Next steps are essentially knowing java commands: <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">Javac</a> and <a href="https://docs.oracle.com/javase/tutorial/deployment/jar/update.html">jar uf</a>, leave as it if you don't understand.</p>
+
+<h3>Change mainScreen is also the same thing, except the code for the mainscreen is: </h3>
+<pre><code class ="language-clike">
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.JPanel;
+
+public class MainScreen extends JPanel{
+	private static final long serialVersionUID = 1L;
+	public void paint(Graphics g) {
+		drawDabg(g);
+		// can draw more here!
+	}
+	// Basically this draws the gif you see in the home screen
+	private void drawDabg(Graphics g) {
+		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Nice1.gif"));
+		g.drawImage(icon, 200, 100, this);
+	}
+}
+
+   </code></pre>
+   
+   <p><i><b>You don't need any dependency if you want to change mainScreen</b></i></p>
+
+<p>Yep, I know this is unnecessary.</p>
+
 </section>
 
 <section id ="alogin">
@@ -217,7 +245,7 @@ public class TheGame extends EssentialFunctions {
 <section id = "Credit">
 <h2>Thanks to</h2>
 <p>My good friend, Benjamin Barros, for translating to Spanish. This could not be done without you <3 </p>
-<p><a href ="https://github.com/frichickens">@frichickens</a> for testing beta builds </p>
+<p><a href ="https://github.com/frichickens">@frichickens</a> for testing beta builds.</p>
 
 </section>
 <h1>_____</h1>
