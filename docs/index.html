@@ -103,18 +103,18 @@ body {
 <p>Uses SHA265 algorithm</p>
 
 <pre><code class="language-clike">
-    	public static String getHash(String pssd) {
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			wl.writeLog(e.toString());
+      public static String getHash(String pssd) {
+    MessageDigest md = null;
+    try {
+      md = MessageDigest.getInstance("SHA-256");
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+      wl.writeLog(e.toString());
 
-		}
-		byte[] digest = md.digest(pssd.getBytes(StandardCharsets.UTF_8));<br>
-		return DatatypeConverter.printHexBinary(digest).toLowerCase();<br>
-	}
+    }
+    byte[] digest = md.digest(pssd.getBytes(StandardCharsets.UTF_8));<br>
+    return DatatypeConverter.printHexBinary(digest).toLowerCase();<br>
+  }
 
 </code></pre>
 <p>Note: bruteforcing in some cases are illegal to perform.<br> Since this program demonstrates over-engineering theme, I added this with no malicious intend.</p>
@@ -128,12 +128,12 @@ body {
 
 <p><i>Hide recommeded popUp:</i> hide what we think we should hide<br><i>Hide "Not show password" recommendation popUp: </i>Hide annoying popUp when you did not choose "Not show password"<br> (Showing password may potentially get your password stolen\ncheck the option if you don't want to take a risk!)<br><i>Hide not recommended popUp:</i> Basically an inverse version of "Hide recommeded popUp."</p>
 <pre><code class = "language-clike">
-    	protected static void popUp(String todis, String title) {
-		if (!HidePopUpOPtion.hideAllP) {
-			JOptionPane.showMessageDialog((Component) null, todis,
-					title, JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
+      protected static void popUp(String todis, String title) {
+    if (!HidePopUpOPtion.hideAllP) {
+      JOptionPane.showMessageDialog((Component) null, todis,
+          title, JOptionPane.INFORMATION_MESSAGE);
+    }
+  }
 </code></pre>
 
 </section>
@@ -142,7 +142,7 @@ body {
 <h2>Change Game</h2>
 <p>OWO, You can change the game!</p>
 <p><b>Requirements:</b></p>
-<p>You need to know Java<br>Download <a href="">ChangeGame.jar</a><br>Create theGame.java and start coding your game!</p>
+<p>You need to know Java<br>Download <a href="https://raw.githubusercontent.com/frychicken/PhEntry/master/GameChanger/GameChanger.jar">GameChanger.jar</a><br>Create theGame.java and start coding your game!</p>
 <p>theGame's template</p>
 <pre><code class ="language-clike">
     import javax.swing.Timer;
@@ -155,38 +155,42 @@ body {
 public class TheGame extends EssentialFunctions {
     ....
     public static Timer timer;
-	private ActionListener animation;
-	
+  private ActionListener animation;
+  
     ...
-    	public TheGame() {
-		animation = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				repaint();
-			}
-		};
-		timer = new Timer(50, animation);
-	}
-	...
-	public void reset() {
+      public TheGame() {
+    animation = new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent ae) {
+        repaint();
+      }
+    };
+    timer = new Timer(50, animation);
+  }
+  ...
+  public void reset() {
         //reset the game when user click play again
-	}
-	
-	...
-	
-	public void paint(Graphics g){
+  }
+  
+  ...
+  
+  public void paint(Graphics g){
        ... 
            //to use dark-mode / night mode
-			g.setColor(UIManager.getColor( "Panel.background" ));
+      g.setColor(UIManager.getColor( "Panel.background" ));
        ...
-	}
-	}
+  }
+  }
 
 </code></pre>
 
-<p><b>Dependencies: </b> <a href="">EssentialFunctions.java</a>, <a href ="">WriteLogF.java</a>, <a href = "">MainScreen</a></p>
+<p><b>Dependencies: </b> <a href="https://raw.githubusercontent.com/frychicken/PhEntry/master/src/EssentialFunctions.java">EssentialFunctions.java</a>, <a href ="https://raw.githubusercontent.com/frychicken/PhEntry/master/src/WriteLogF.java">WriteLogF.java</a>, <a href = "https://raw.githubusercontent.com/frychicken/PhEntry/master/src/MainScreen.java">MainScreen.java</a></p>
 
-<p>Then, just follow the instructions in the ChangeGame.jar</p>
+<p>EssentialFunctions.java Contains needed functions for the program</p>
+<p>WriteLogF.java is to write log by calling writeLog(str) if you extends EssentialFunctions</p>
+<p>MainScreen.java is the mainscreen of the program where there is a gif playing</p>
+
+<p>Then, just follow the instructions in the GameChanger.jar</p>
 <p>Next steps are essentially knowing java commands: <a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javac.html">Javac</a> and <a href="https://docs.oracle.com/javase/tutorial/deployment/jar/update.html">jar uf</a>, leave as it if you don't understand.</p>
 
 <h3>Change mainScreen is also the same thing, except the code for the mainscreen is: </h3>
@@ -198,16 +202,16 @@ import java.awt.Toolkit;
 import javax.swing.JPanel;
 
 public class MainScreen extends JPanel{
-	private static final long serialVersionUID = 1L;
-	public void paint(Graphics g) {
-		drawDabg(g);
-		// can draw more here!
-	}
-	// Basically this draws the gif you see in the home screen
-	private void drawDabg(Graphics g) {
-		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Nice1.gif"));
-		g.drawImage(icon, 200, 100, this);
-	}
+  private static final long serialVersionUID = 1L;
+  public void paint(Graphics g) {
+    drawDabg(g);
+    // can draw more here!
+  }
+  // Basically this draws the gif you see in the home screen
+  private void drawDabg(Graphics g) {
+    Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Nice1.gif"));
+    g.drawImage(icon, 200, 100, this);
+  }
 }
 
    </code></pre>
@@ -221,12 +225,12 @@ public class MainScreen extends JPanel{
 <section id ="alogin">
     <h2>About Loging in</h2>
     <p>You can only create 1 account only, if you create another, you need to detele your pre-existing one.</p>
-    <p>When you log in, you will see the window saying welcome, [yourname] and reddit. <br> This is the webview version of the website which can be accessed <a href = ""> here</a>.<br>
+    <p>When you log in, you will see the window saying welcome, [yourname] and reddit. <br> This is the webview version of the website which can be accessed <a href = "https://frychicken.github.io/PhEntry/index.html"> here</a>.<br>
        You are NOT actually logged in to reddit but, rather, just got to view it. <br>
        Your login and password are not stored on the server;<br> it is just a simple javascript to show yor username you created on the server.
     
     </p>
-    <p>You can check the source code at <a href =""> index.html</a></p>
+    <p>You can check the source code at <a href ="https://raw.githubusercontent.com/frychicken/PhEntry/master/index.html"> index.html</a></p>
 </section>
 
 <section id ="Building">
