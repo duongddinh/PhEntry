@@ -602,7 +602,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 
 			} else {
 				if(!hideNRP)
-					popUp("There is no way you read that fast, keep reading\n"+(tEnd2 - tStart2)/1000.0 +"/"+300+" secs", "Keep reading");
+					popUp("There is no way you read that fast, keep reading\n"+(tEnd2 - tStart2)/1000.0 +"/"+10+" secs", "Keep reading");
 
 			}
 
@@ -638,7 +638,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			}
 			else {
 				if(!hideNRP)
-					popUp("There is no way you read that fast, keep reading\n"+(tEnd - tStart)/1000.0 +"/"+300+" secs", "Keep reading");
+					popUp("There is no way you read that fast, keep reading\n"+(tEnd - tStart)/1000.0 +"/"+10+" secs", "Keep reading");
 			}
 
 		}
