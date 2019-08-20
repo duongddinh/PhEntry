@@ -44,6 +44,7 @@ abstract class EssentialFunctions extends JPanel {
 	protected void restart() {
 		if(confirm("Do you want to restart the program to enact change?") ==0) {
 			System.exit(0);
+			
 		}
 	}
 	

@@ -323,6 +323,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 	public  void loggedIN() {
 		allButton[0].setVisible(false);
 		allButton[7].setVisible(false);
+		allButton[11].setVisible(false);
 		allButton[8].setVisible(true);
 		username.setVisible(false);
 		psswd.setVisible(false);
@@ -611,6 +612,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			allButton[0].setVisible(true);
 			allButton[7].setVisible(true);
 			allButton[8].setVisible(false);
+			allButton[11].setVisible(true);
 			username.setVisible(true);
 			psswd.setVisible(true);
 			cb.setVisible(true);
