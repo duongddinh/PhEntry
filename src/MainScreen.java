@@ -12,5 +12,6 @@ public class MainScreen extends JPanel{
 	private void drawDabg(Graphics g) {
 		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Nice1.gif"));
 		g.drawImage(icon, 200, 100, this);
+		this.repaint();
 	}
 }

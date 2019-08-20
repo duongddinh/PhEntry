@@ -36,7 +36,7 @@ public class CheckUpdate extends EssentialFunctions{
 			public void actionPerformed(ActionEvent e){
 				//updating variables 
 				drc.changec(todis);
-				drc.repaint();
+				frameH.repaint();
 			}
 		});
 		t.start();
@@ -44,7 +44,7 @@ public class CheckUpdate extends EssentialFunctions{
 
 	public void toRepaint(String todis) {
 		drc.changec(todis);
-		drc.repaint();
+		frameH.repaint();
 	}
 
 	public void closeUpWindow() {

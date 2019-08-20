@@ -29,7 +29,7 @@ public class TheGame extends EssentialFunctions{
 		animation = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				repaint();
+				frame.repaint();
 			}
 		};
 		timer = new Timer(50, animation);
