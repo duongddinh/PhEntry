@@ -162,7 +162,7 @@ public class TheGame extends EssentialFunctions {
     animation = new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent ae) {
-        repaint();
+        frame.repaint();
       }
     };
     timer = new Timer(50, animation);
@@ -201,7 +201,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
-public class MainScreen extends JPanel{
+public class MainScreen extends Component{
   private static final long serialVersionUID = 1L;
   public void paint(Graphics g) {
     drawDabg(g);
