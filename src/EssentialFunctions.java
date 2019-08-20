@@ -98,10 +98,10 @@ abstract class EssentialFunctions extends JPanel {
 	   try {
 		re = getFistLine("/updateSource.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null)) {
-			return "https://null0verflow.xyz/hackathon/sources/currentVersion.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/currentVersion.txt";
 		}
 	   } catch (Exception e) {
-			return "https://null0verflow.xyz/hackathon/sources/currentVersion.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/currentVersion.txt";
 
 	   }
 		return re;
@@ -112,9 +112,9 @@ abstract class EssentialFunctions extends JPanel {
 		try {
 		re=  getFistLine("/TheGame.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
-			return "https://null0verflow.xyz/hackathon/sources/TheGame.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/Sources/TheGame.txt";
 		} catch (Exception e) {
-			return "https://null0verflow.xyz/hackathon/sources/TheGame.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/Sources/TheGame.txt";
 		}
 		return re;
 	}
@@ -123,9 +123,9 @@ abstract class EssentialFunctions extends JPanel {
 		try {
 		re= getFistLine("/MainScreen.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
-			return "https://null0verflow.xyz/hackathon/sources/MainScreen.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/Sources/MainScreen.txt";
 		} catch (Exception e) {
-			return "https://null0verflow.xyz/hackathon/sources/MainScreen.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/Sources/MainScreen.txt";
 		}
 		return re;
 	}
@@ -134,9 +134,9 @@ abstract class EssentialFunctions extends JPanel {
 		try {
 		re =  getFistLine("/UpdaterSource.txt");
 		if (re.equals("false") || re.equals("") ||re.equals(" ") ||re.equals(null))
-			return "https://null0verflow.xyz/hackathon/sources/ControlPanelS.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/updater/Updater.jar";
 		} catch (Exception e) {
-			return "https://null0verflow.xyz/hackathon/sources/ControlPanelS.txt";
+			return "https://raw.githubusercontent.com/frychicken/PhEntry/master/updater/Updater.jar";
 		}
 		return re;
 		

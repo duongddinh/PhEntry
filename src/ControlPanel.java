@@ -343,7 +343,6 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String s = e.getActionCommand(); 
 		if(soundfx) {
 			PlaySound ps = new PlaySound();
 			ps.play();
@@ -428,7 +427,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 
 		if(e.getSource() == allButton[18]) {
 			Desktop desktop = Desktop.getDesktop();
-			String message = "mailto:bob@null0verflow.xyz?subject=feedback";
+			String message = "mailto:bobdinh139@icloud.com?subject=feedback";
 			URI uri = URI.create(message);
 			try {
 				desktop.mail(uri);
@@ -568,7 +567,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			allButton[4].setVisible(false);
 			allButton[3].setVisible(true);
 		}
-		if (s.equals("Log in because I already have an account as I created it")) {
+		if (e.getSource() == allButton[7]) {
 
 			UserCredent.login(username.getText(),String.valueOf(psswd.getPassword()));
 			if (UserCredent.loginS) {

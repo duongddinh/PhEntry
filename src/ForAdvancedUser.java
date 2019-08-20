@@ -109,7 +109,7 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 			if (Desktop.isDesktopSupported()) {
 				Desktop desktop = Desktop.getDesktop();
 				try {
-					URI uri = new URI("https://null0verflow.xyz/hackathon/docs/index.html");
+					URI uri = new URI("https://frychicken.github.io/PhEntry/docs/index.html");
 					desktop.browse(uri);
 				} catch (Exception ex) {
 					ex.printStackTrace();
