@@ -458,6 +458,7 @@ public class ControlPanel extends EssentialFunctions  implements ActionListener{
 			allButton[12].setVisible(true);
 			allButton[13].setVisible(true);
 			allButton[14].setVisible(false);
+			allButton[15].setVisible(false);
 			aboutPassord.setVisible(true);
 			frame.getContentPane().remove(ng); 	
 			frame.setLocationRelativeTo(null);

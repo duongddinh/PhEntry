@@ -1,10 +1,9 @@
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import javax.swing.JPanel;
-
-public class MainScreen extends JPanel{
+public class MainScreen extends Component{
 	private static final long serialVersionUID = 1L;
 	public void paint(Graphics g) {
 		drawDabg(g);
