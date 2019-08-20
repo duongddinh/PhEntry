@@ -191,7 +191,7 @@ public class CheckUpdate extends EssentialFunctions{
 				popUp(todis, "Error");
 			}
 			else {
-				todis = "hash matched "+ getFileChecksum(shaDigest, in[i]);
+				todis = "hash matched "+ fromcom[i]+" at " + in[i];
 				System.out.println(todis);
 				wl.writeLog(todis);
 			}
