@@ -75,6 +75,6 @@ public class DrawCheck extends EssentialFunctions {
 		f.drawString(display, 20,120);
 	}
 	public int getVersion() {
-		return 1; 
+		return 2; 
 	}
 }

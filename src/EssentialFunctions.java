@@ -48,13 +48,13 @@ abstract class EssentialFunctions extends JPanel {
 		}
 	}
 	
-	protected static void popUp(String todis, String title) {
+	public static void popUp(String todis, String title) {
 		if (!HidePopUpOPtion.hideAllP) {
 			JOptionPane.showMessageDialog((Component) null, todis,
 					title, JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-	protected static int confirm(String todis) {
+	public static int confirm(String todis) {
 		return JOptionPane.showConfirmDialog((Component) null, todis,
 				"Confirm", JOptionPane.YES_NO_OPTION);
 	}
@@ -143,7 +143,7 @@ abstract class EssentialFunctions extends JPanel {
 		
 	}
 	
-	public void WriteInfo(String where, boolean trueorfalse) {
+	public static void WriteInfo(String where, boolean trueorfalse) {
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(System.getProperty("user.dir")+where);

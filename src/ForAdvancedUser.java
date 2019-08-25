@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.net.URI;
@@ -22,6 +23,9 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 	JFrame frame = new JFrame();
 	JPanel panel= new JPanel();;
 	JButton ok;
+	JButton remove2= new JButton("Clean up");
+	JButton switchJava= new JButton("Java interface");
+
 	JTextField question1 = new JTextField(EssentialFunctions.getUpDateSource(),21);
 	JTextField question0 = new JTextField(EssentialFunctions.getMainScreen(),21);
 	JTextField question2 = new JTextField(EssentialFunctions.getSuperGoodUIS(), 21);
@@ -50,6 +54,8 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 			instruc4.setText("Descargando la fuente Updater");
 			instruc5.setText("Se cuidadoso con las fuentes no confiables; la única fuente confiable (hasta ahora) es mi github");
 			changeGame.setText("Cambiar juego");
+			remove2.setText("Limpiar");
+			switchJava.setText("Interfaz java");
 		} 
 
 		instruc5.setForeground(Color.RED);
@@ -64,8 +70,13 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 		panel.add(ok);
 		panel.add(instruc5);
 		panel.add(changeGame);
-
+		panel.add(remove2);
+		panel.add(switchJava);
+		
 		ok.addActionListener(this);
+		remove2.addActionListener(this);
+		switchJava.addActionListener(this);
+
 		changeGame.addActionListener(this);
 
 		frame.setResizable(false);
@@ -104,6 +115,43 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 			newSource(question0.getText(), "/MainScreen.txt");
 			newSource(question2.getText(), "/TheGame.txt");
 			newSource(question4.getText(), "/UpdaterSource.txt");
+		}
+		if(e.getSource() == switchJava) {
+			
+			EssentialFunctions.WriteInfo("/javaInter.txt", !Boolean.parseBoolean(EssentialFunctions.getFistLine("/javaInter.txt")));
+			EssentialFunctions.popUp("Restart to enact changes","Restart");
+
+			
+		}
+		if(e.getSource() == remove2) {
+			if (EssentialFunctions.confirm("By cleaning this, you delete all data the program created\n you sure you want to continue?") ==0) {
+				File file[] = new File[11]; 
+				file[0] = new File(System.getProperty("user.dir")+"/nightmode.txt");
+				file[1] = new File(System.getProperty("user.dir")+"/usercre.txt");
+				file[2] = new File(System.getProperty("user.dir")+"/log.txt");
+				file[3] = new File(System.getProperty("user.dir")+"/lang.txt");
+				file[4] = new File(System.getProperty("user.dir")+"/keepL.txt");
+				file[5] = new File(System.getProperty("user.dir")+"/highscore.txt");
+				file[6] = new File(System.getProperty("user.dir")+"/TheGame.txt");
+				file[7] = new File(System.getProperty("user.dir")+"/MainScreen.txt");
+				file[8] = new File(System.getProperty("user.dir")+"/updateSource.txt");
+				file[9] = new File(System.getProperty("user.dir")+"/UpdaterSource.txt");
+				file[10] = new File(System.getProperty("user.dir")+"/javaInter.txt");
+
+				for (int i=0; i< file.length; i++) {
+					if(file[i].delete()) { 
+						System.out.println(file[i] +" deleted successfully"); 
+						EssentialFunctions.popUp(file[i] +" deleted successfully","Clean-up");
+					} 
+					else{ 
+						System.out.println("Failed to delete "+ file[i]); 
+						EssentialFunctions.popUp("Failed to delete "+ file[i],"Clean-up");
+
+					} 
+				}
+
+			}
+
 		}
 		if (s.equals("Change game") || s.equals("Cambiar juego")) {
 			if (Desktop.isDesktopSupported()) {
