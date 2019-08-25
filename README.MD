@@ -15,6 +15,8 @@ Please Use [jdk 8 (1.8.0_211)](https://www.oracle.com/technetwork/java/javase/do
  * Spanish translation is very basic with the main purpose of showing off the theme of over-engineering only
  * [Read more](https://frychicken.github.io/PhEntry/docs/index.html#Important)
 
+[Check out the release tap to see newest version](https://github.com/frychicken/PhEntry/releases)
+
 [Short video introductory](https://www.reddit.com/r/ProgrammerHumor/comments/ct4q1e/hackathon_2019_entry/)
 
 [Check out the full documentation](https://frychicken.github.io/PhEntry/docs/index.html)

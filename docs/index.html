@@ -27,6 +27,7 @@ body {
   | <a href="#ChangingGame">Change Game/MainScreen</a> 
   | <a href="#alogin">About Loging in</a> 
   | <a href="#Building">Building the project</a> 
+  | <a href="#TrSh">TroubleShooting</a> 
   | <a href="#license">LICENSE</a> 
   | <a href="#Credit">Thanks to</a> |
   
@@ -36,8 +37,12 @@ body {
 <h2>Overview</h2>
 <p><a href = "https://www.reddit.com/r/ProgrammerHumor/comments/ckhow3/the_very_first_programmerhumor_hackathon_is_now/">About the event</a>
 <br><a href ="https://www.reddit.com/r/ProgrammerHumor/comments/ct4q1e/hackathon_2019_entry/">Video Overview</a></p>
-<p>This is a over-engineered log in form with more features than you ever need.<br>Support Mac, windows and linux.</p>
+<p>This is an over-engineered log in form with more features than you ever need.<br>Support Mac, windows and linux.</p>
 <p><a href ="docs/image/icon.psd">Gif using in the project</a> is open source as well!</p>
+
+<p><b><i>NOTE: After 30th of August, This will not be updated as the project is due.<br>Therefore, until August 30, the program might receive several updates even though I already submitted it <br>(because I thought I might be busy for school but apparently not).</i></b></p>
+
+<p><a href="https://github.com/frychicken/PhEntry/releases">Download LogInForm.jar</a></p>
 
 </section>
 
@@ -249,6 +254,13 @@ public class MainScreen extends Component{
 <p>run Build.bat (windows)/ Build.sh (linux, macos)</p>
 <p><b>This program is built on Mac OS (it is not a big deal but just to let you know).</b></p>
 
+</section>
+
+<section id="TrSh">
+<h2>TroubleShooting</h2>
+<p><code>Exception in thread "main" java.lang.NoClassDefFoundError: javafx/application/Platform</code></p>
+<p><i>Reason</i><br>You you version of java that does not have javafx.<br>If this appears on version 1.8 on linux, check to see if you use openjdk.<br> If you do, download openjfx because openjfx is not packaged in openjdk.<br><code>sudo apt-get install openjfx</code></p>
+<p>Another way of solving this: get java on oracle (link above)<br>Extract the file: <code>$ tar xvzf jdk-8u221-linux-x64.tar.gz</code><br> And run the LogInForm.jar:<br> <code>$ path/to/java/just/extracted/bin/java -jar /path/to/jarFile/LogInForm.jar</code><br>Or you can remove openjdk and set JAVA_HOME.</p>
 </section>
 
 <section id ="license">
