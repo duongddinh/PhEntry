@@ -27,6 +27,7 @@ body {
   | <a href="#ChangingGame">Change Game/MainScreen</a> 
   | <a href="#alogin">About Logging in</a> 
   | <a href="#javainter">Java Interface</a>
+  | <a href="#cleanup">Clean-up</a>
   | <a href="#Building">Building the project</a> 
   | <a href="#TrSh">TroubleShooting</a> 
   | <a href="#license">LICENSE</a> 
@@ -89,7 +90,7 @@ body {
   <li>Built in feedback/bug report</li>
   <li>Sound</li>
   <li>Dark mode</li>
-  <li>Clean-up program-created files</li>
+  <li><a href="#cleanup">Clean-up program-created files</a></li>
   <li><a href="#javainter">java interface</a></li>
 </ul>
 </section>
@@ -251,9 +252,10 @@ public class MainScreen extends Component{
     <p>You can check the source code at <a href ="https://raw.githubusercontent.com/frychicken/PhEntry/master/index.html"> index.html</a></p>
 </section>
 
-<section id = "#javainter">
+<section id = "javainter">
 <h2>Java Interface</h2>
-<p>This does not have any effects on Mac only windows</p>
+<p>In advanced user mode.</p>
+<p>This does not have any effects on Mac, only on windows.</p>
 
 <pre><code class ="language-clike">
 		if (Boolean.parseBoolean(EssentialFunctions.getFistLine("/javaInter.txt"))) {
@@ -270,6 +272,14 @@ public class MainScreen extends Component{
 
 <p>This allows you to use your current system's theme or default java theme. <br>Use this by clicking the button once to toggle on/off.</p>
 
+</section>
+
+<section id="cleanup">
+<h2>Clean-up program-generated files</h2>
+<p>In advanced user mode.</p>
+<p>The program will re-generated files if restart.</p>
+<p>Files that the program will delete: <br><code>nightmode.txt, usercre.txt, log.txt, lang.txt, keepL.txt, highscore.txt, TheGame.txt, MainScreen.txt, updateSource.txt, UpdaterSource.txt, javaInter.txt</code> </p>
+<p>Be cautious if you have any important files that have the same name as the program.</p>
 </section>
 
 <section id ="Building">
