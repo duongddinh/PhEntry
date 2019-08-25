@@ -185,7 +185,7 @@ public class CheckUpdate extends EssentialFunctions{
 		MessageDigest shaDigest = MessageDigest.getInstance("SHA-256");
 		for (int i=0; i< in.length; i++) {
 			if(!getFileChecksum(shaDigest, in[i]).equals(fromcom[i].toString())) {
-				todis = "mismatched hash at "+ in[i] +"\n expected: "+fromcom[i]+  "\n reality:" + getFileChecksum(shaDigest, in[i]);
+				todis = "hash mismatched at "+ in[i] +"\n expected: "+fromcom[i]+  "\n reality: " + getFileChecksum(shaDigest, in[i]);
 				System.out.println(todis);
 				wl.writeLog(todis);
 				popUp(todis, "Error");
