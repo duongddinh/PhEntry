@@ -29,6 +29,7 @@ body {
   | <a href="#javainter">Java Interface</a>
   | <a href="#cleanup">Clean-up</a>
   | <a href="#Building">Building the project</a> 
+  | <a href="#installJava">Install Java</a> 
   | <a href="#TrSh">TroubleShooting</a> 
   | <a href="#license">LICENSE</a> 
   | <a href="#Credit">Thanks to</a> |
@@ -288,6 +289,18 @@ public class MainScreen extends Component{
 <p>run Build.bat (windows)/ Build.sh (linux, macos)</p>
 <p><b>This program is built on Mac OS (it is not a big deal but just to let you know).</b></p>
 
+</section>
+
+<section id="installJava">
+<h2>Install Java</h2>
+
+<p><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">get jdk 1.8.0_u221</a>(you may need to ceate an account)</p>
+<p><b>For linux</b></p>
+<p>For linux user, I would not recommend openjdk but, rather, the link above. Because openjfx (Java FX) is not packaged in openjdk.</p>
+<p>If you have openjdk installed, remove it: <code>sudo apt-get remove openjdk*</code><br>Extract the file <code> $ tar xvzf jdk-8u221-linux-x64.tar.gz</code><br>Place the file to where you want.<br><code>$ vi ~/.bashrc</code> <br>and add <code>export JAVA_HOME=path/you/want/jdk1.8.0_221</code> and <code>export PATH=$JAVA_HOME/bin:$PATH</code> <br>Then, do <code>source ~/.bashrc</code></p>
+
+<p><b>For windows, macos</b></p>
+<p>Just do what they say in the installation process.</p>
 </section>
 
 <section id="TrSh">

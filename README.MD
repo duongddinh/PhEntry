@@ -2,13 +2,17 @@
 
 [Check out the event](https://www.reddit.com/r/ProgrammerHumor/comments/ckhow3/the_very_first_programmerhumor_hackathon_is_now/)
 
-Support Mac, windows and linux.
+Support Mac, windows and linux. 
+
+For troubleshooting, check [wiki/troubleshooting](https://frychicken.github.io/PhEntry/docs/index.html#TrSh)
 
 Please Use [jdk 8 (1.8.0_211)](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) to build/run
 
 **Why?** Because javaFX was removed from jdk 11 as a standalone module, and this program is written from largely swing with javaFX embedded in.
 
-**What this?** This is a over-engineered log in form with more features than you ever need.
+[Instructions for linux user](https://frychicken.github.io/PhEntry/docs/index.html#installJava)
+
+**What this?** This is an over-engineered log in form with more features than you ever need.
 
 **Important:** 
  * Ignore Privacy policy and Terms and conditions
