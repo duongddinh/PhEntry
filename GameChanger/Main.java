@@ -99,7 +99,7 @@ public class Main extends JFrame implements ActionListener{
 
 		frame = new JFrame("Game Change");
 
-		txtboc = new JTextField("javac TheGame.java EssentialFunctions.java WriteLogF.java");  
+		txtboc = new JTextField("javac TheGame.java EssentialFunctions.java WriteLogF.java MainScreen.java HidePopUpOPtion.java");  
 		txtboc2 = new JTextField("jar uf LogInForm.jar TheGame.class TheGame$1.class");  
 
 		JLabel lblLabel = new JLabel("Enter your command to compile (if you don't know, leave it as it is)");
@@ -184,13 +184,23 @@ public class Main extends JFrame implements ActionListener{
 			frame.setVisible(false);
 			Runtime r= Runtime.getRuntime();
 			try {
-				r.exec(txtboc.getText());
+				Process proc1 = r.exec(txtboc.getText());
+				BufferedReader stdInput1 = new BufferedReader(new InputStreamReader(proc1.getInputStream()));
+				BufferedReader stdError1 = new BufferedReader(new InputStreamReader(proc1.getErrorStream()));
+				String s2 = null;
+				while ((s2 = stdInput1.readLine()) != null) {
+					todis = s2;
+				    System.out.println(s2);
+				}
+
+				while ((s2 = stdError1.readLine()) != null) {
+					todis = s2;
+				    System.out.println(s2);
+				}
 				Thread.sleep(2000);
 				Process proc  = r.exec(txtboc2.getText());
-				BufferedReader stdInput = new BufferedReader(new 
-				     InputStreamReader(proc.getInputStream()));
-				BufferedReader stdError = new BufferedReader(new 
-				     InputStreamReader(proc.getErrorStream()));
+				BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+				BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 				String s1 = null;
 				while ((s1 = stdInput.readLine()) != null) {
 					todis = s1;

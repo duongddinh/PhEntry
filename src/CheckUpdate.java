@@ -219,7 +219,7 @@ public class CheckUpdate extends EssentialFunctions{
 		try {
 			URL updaterD = new URL(EssentialFunctions.getUpDaterSource());
 			ReadableByteChannel ok = Channels.newChannel(updaterD.openStream());
-			FileOutputStream okay = new FileOutputStream(System.getProperty("user.dir")+"Updater.jar");
+			FileOutputStream okay = new FileOutputStream(System.getProperty("user.dir")+"/Updater.jar");
 			okay.getChannel().transferFrom(ok, 0, Long.MAX_VALUE);
 			okay.close();
 			ok.close();
