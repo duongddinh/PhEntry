@@ -95,7 +95,7 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 
 	}
 
-	public void newSource(String where, String namesource) {
+	public void newSource(String namesource, String where) {
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(System.getProperty("user.dir")+where);
@@ -110,7 +110,7 @@ public class ForAdvancedUser extends JPanel  implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand(); 
-		if(s.equals("ok")) {
+		if(s.equals("Ok")) {
 			newSource(question1.getText(), "/updateSource.txt");
 			newSource(question0.getText(), "/MainScreen.txt");
 			newSource(question2.getText(), "/TheGame.txt");
