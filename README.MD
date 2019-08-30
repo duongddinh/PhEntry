@@ -6,7 +6,7 @@ Support Mac, windows and linux.
 
 For troubleshooting, check [wiki/troubleshooting](https://frychicken.github.io/PhEntry/docs/index.html#TrSh)
 
-Please Use [jdk 8 (1.8.0_211)](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) to build/run
+Please Use [jdk 8 (1.8.0_221)](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) to build/run
 
 **Why?** Because javaFX was removed from jdk 11 as a standalone module, and this program is written from largely swing with javaFX embedded in.
 
