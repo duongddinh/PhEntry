@@ -21,6 +21,12 @@ public class OverEngi extends EssentialFunctions {
 				e1.printStackTrace();
 				wl.writeLog(e1.toString());
 			}
+		}else {
+			try {
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
+				e1.printStackTrace();
+			}
 		}
 
 		isNightMode();
